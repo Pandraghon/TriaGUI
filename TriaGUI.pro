@@ -15,8 +15,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    pointstablemodel.cpp \
+    triangulation.cpp \
+    point.cpp \
+    data.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    pointstablemodel.h \
+    triangulation.h \
+    point.h \
+    data.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    pointstablemodel.ui
