@@ -20,3 +20,15 @@ void Triangulation::addPoint(Point* p) {
         if(p != *it) m_points.insert(it.base(), p);
     }
 }
+
+std::vector<Segment*> Triangulation::getSegments() const {
+    return m_segments;
+}
+
+Segment* Triangulation::getSegment(int index) const {
+    return m_segments.at(index);
+}
+
+void Triangulation::addSegment(Segment* s) {
+    // TODO isLeft ?
+}

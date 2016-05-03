@@ -74,8 +74,14 @@ public:
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         frame = new QFrame(centralWidget);
         frame->setObjectName(QStringLiteral("frame"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(frame->sizePolicy().hasHeightForWidth());
+        frame->setSizePolicy(sizePolicy);
         frame->setMinimumSize(QSize(300, 0));
-        frame->setMaximumSize(QSize(250, 16777215));
+        frame->setMaximumSize(QSize(300, 16777215));
+        frame->setBaseSize(QSize(0, 0));
         verticalLayout_4 = new QVBoxLayout(frame);
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setContentsMargins(11, 11, 11, 11);
@@ -88,9 +94,6 @@ public:
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         label_3 = new QLabel(frame);
         label_3->setObjectName(QStringLiteral("label_3"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
         label_3->setSizePolicy(sizePolicy);
 
@@ -195,7 +198,7 @@ public:
         frame_2 = new QFrame(centralWidget);
         frame_2->setObjectName(QStringLiteral("frame_2"));
         frame_2->setMinimumSize(QSize(300, 0));
-        frame_2->setMaximumSize(QSize(250, 16777215));
+        frame_2->setMaximumSize(QSize(300, 16777215));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
 

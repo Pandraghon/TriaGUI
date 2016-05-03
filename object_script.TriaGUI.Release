@@ -1,0 +1,13 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\pointstablemodel.o
+./release\triangulation.o
+./release\point.o
+./release\data.o
+./release\segment.o
+./release\segmentstablemodel.o
+./release\moc_mainwindow.o
+./release\moc_pointstablemodel.o
+./release\moc_segmentstablemodel.o
+);

@@ -20,14 +20,16 @@ SOURCES += main.cpp\
     triangulation.cpp \
     point.cpp \
     data.cpp \
-    segment.cpp
+    segment.cpp \
+    segmentstablemodel.cpp
 
 HEADERS  += mainwindow.h \
     pointstablemodel.h \
     triangulation.h \
     point.h \
     data.h \
-    segment.h
+    segment.h \
+    segmentstablemodel.h
 
 FORMS    += mainwindow.ui \
     pointstablemodel.ui

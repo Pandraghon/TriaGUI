@@ -1,16 +1,15 @@
-#ifndef POINTSTABLEMODEL_H
-#define POINTSTABLEMODEL_H
+#ifndef SEGMENTSTABLEMODEL_H
+#define SEGMENTSTABLEMODEL_H
 
 #include <QAbstractTableModel>
 
 #include "triangulation.h"
 
-class PointsTableModel : public QAbstractTableModel
+class SegmentsTableModel : public QAbstractTableModel
 {
     Q_OBJECT
-
 public:
-    explicit PointsTableModel(Triangulation* triang, QObject *parent = 0);
+    explicit SegmentsTableModel(Triangulation* triang, QObject *parent = 0);
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     int columnCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
@@ -26,6 +25,9 @@ private:
 
 signals:
     void editCompleted(const QString &);
+
+public slots:
+
 };
 
-#endif // POINTSTABLEMODEL_H
+#endif // SEGMENTSTABLEMODEL_H

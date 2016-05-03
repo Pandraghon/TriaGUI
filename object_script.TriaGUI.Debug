@@ -1,0 +1,13 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\pointstablemodel.o
+./debug\triangulation.o
+./debug\point.o
+./debug\data.o
+./debug\segment.o
+./debug\segmentstablemodel.o
+./debug\moc_mainwindow.o
+./debug\moc_pointstablemodel.o
+./debug\moc_segmentstablemodel.o
+);

@@ -1,34 +1,32 @@
-#include "pointstablemodel.h"
+#include "segmentstablemodel.h"
 
-#include <QDebug>
-
-PointsTableModel::PointsTableModel(Triangulation *triang, QObject *parent) :
+SegmentsTableModel::SegmentsTableModel(Triangulation *triang, QObject *parent) :
     QAbstractTableModel(parent),
     m_triang(triang),
-    m_headers({tr("x"), tr("y"), tr("actions")})
+    m_headers({tr("P1"), tr("P2"), tr("actions")})
 {
 }
 
-int PointsTableModel::rowCount(const QModelIndex & /*parent*/) const {
-    return m_triang->getPoints().size() + 1;
+int SegmentsTableModel::rowCount(const QModelIndex & /*parent*/) const {
+    return m_triang->getSegments().size() + 1;
 }
 
-int PointsTableModel::columnCount(const QModelIndex & /*parent*/) const {
+int SegmentsTableModel::columnCount(const QModelIndex & /*parent*/) const {
     return 3;
 }
 
-QVariant PointsTableModel::data(const QModelIndex &index, int role) const {
+QVariant SegmentsTableModel::data(const QModelIndex &index, int role) const {
     int row{index.row()};
     int col{index.column()};
 
     switch(role) {
         case Qt::DisplayRole:
-            if(row < m_triang->getPoints().size()) {
+            if(row < m_triang->getSegments().size()) {
                 switch(col) {
                     case 0:
-                        return m_triang->getPoint(row)->getX();
+                        break;//return m_triang->getPoints()[row]->getX();
                     case 1:
-                        return m_triang->getPoint(row)->getY();
+                        break;//return m_triang->getPoints()[row]->getY();
                 }
             }
             break;
@@ -43,19 +41,19 @@ QVariant PointsTableModel::data(const QModelIndex &index, int role) const {
     return QVariant();
 }
 
-QVariant PointsTableModel::headerData(int section, Qt::Orientation orientation, int role) const {
+QVariant SegmentsTableModel::headerData(int section, Qt::Orientation orientation, int role) const {
     if(role == Qt::DisplayRole) {
         if(orientation == Qt::Horizontal) {
             return m_headers[section];
         } else {
-            return QString("P%1").arg(section + 1);
+            return QString("S%1").arg(section + 1);
         }
     }
 
     return QVariant();
 }
 
-bool PointsTableModel::setData(const QModelIndex &index, const QVariant &value, int role) {
+bool SegmentsTableModel::setData(const QModelIndex &index, const QVariant &value, int role) {
     int row{index.row()};
     int col{index.column()};
     if(role == Qt::EditRole) {
@@ -64,10 +62,10 @@ bool PointsTableModel::setData(const QModelIndex &index, const QVariant &value, 
         if(row < m_triang->getPoints().size()) {
             switch(col) {
             case 0:
-                m_triang->getPoint(row)->setX(v);
+                //m_triang->getPoint(row)->setX(v);
                 break;
             case 1:
-                m_triang->getPoint(row)->setY(v);
+                //m_triang->getPoint(row)->setY(v);
                 break;
             }
         }
@@ -76,11 +74,11 @@ bool PointsTableModel::setData(const QModelIndex &index, const QVariant &value, 
     return true;
 }
 
-Qt::ItemFlags PointsTableModel::flags(const QModelIndex &index) const {
+Qt::ItemFlags SegmentsTableModel::flags(const QModelIndex &index) const {
     if(index.column() == 2) return Qt::ItemIsEnabled;
     return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
 }
 
-void PointsTableModel::setTriangulation(Triangulation* triang) {
+void SegmentsTableModel::setTriangulation(Triangulation* triang) {
     m_triang = triang;
 }

@@ -13,6 +13,9 @@ public:
     std::vector<Point*> getPoints() const;
     Point* getPoint(int index) const;
     void addPoint(Point* p);
+    std::vector<Segment*> getSegments() const;
+    Segment* getSegment(int index) const;
+    void addSegment(Segment* s);
 
 private:
     std::vector<Point*> m_points;

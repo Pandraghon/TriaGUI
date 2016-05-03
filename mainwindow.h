@@ -5,6 +5,7 @@
 
 #include "data.h"
 #include "pointstablemodel.h"
+#include "segmentstablemodel.h"
 
 enum MODE { POINT, SEGMENT, SELECTION, SUPPRESSION };
 
@@ -25,6 +26,7 @@ private:
     Data m_data;
     MODE m_currentMode;
     PointsTableModel* m_pointsTableModel;
+    SegmentsTableModel* m_segmentsTableModel;
 };
 
 #endif // MAINWINDOW_H
