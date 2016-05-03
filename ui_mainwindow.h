@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -32,9 +33,11 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout_3;
-    QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
+    QFrame *frame;
+    QVBoxLayout *verticalLayout_4;
+    QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_3;
     QComboBox *comboBox;
@@ -49,7 +52,7 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QLabel *textSelectedPointName;
     QLabel *textSelectedPointPosition;
-    QSpacerItem *horizontalSpacer;
+    QFrame *frame_2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -58,25 +61,32 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1042, 500);
+        MainWindow->resize(1058, 669);
         MainWindow->setBaseSize(QSize(530, 420));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        verticalLayout_3 = new QVBoxLayout(centralWidget);
-        verticalLayout_3->setSpacing(6);
-        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout = new QVBoxLayout(centralWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        frame = new QFrame(centralWidget);
+        frame->setObjectName(QStringLiteral("frame"));
+        frame->setMinimumSize(QSize(300, 0));
+        frame->setMaximumSize(QSize(250, 16777215));
+        verticalLayout_4 = new QVBoxLayout(frame);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        label_3 = new QLabel(centralWidget);
+        label_3 = new QLabel(frame);
         label_3->setObjectName(QStringLiteral("label_3"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
@@ -86,7 +96,7 @@ public:
 
         horizontalLayout_3->addWidget(label_3);
 
-        comboBox = new QComboBox(centralWidget);
+        comboBox = new QComboBox(frame);
         comboBox->setObjectName(QStringLiteral("comboBox"));
         QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
@@ -97,9 +107,9 @@ public:
         horizontalLayout_3->addWidget(comboBox);
 
 
-        verticalLayout->addLayout(horizontalLayout_3);
+        verticalLayout_3->addLayout(horizontalLayout_3);
 
-        label = new QLabel(centralWidget);
+        label = new QLabel(frame);
         label->setObjectName(QStringLiteral("label"));
         QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
         sizePolicy2.setHorizontalStretch(0);
@@ -107,9 +117,9 @@ public:
         sizePolicy2.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
         label->setSizePolicy(sizePolicy2);
 
-        verticalLayout->addWidget(label);
+        verticalLayout_3->addWidget(label);
 
-        tabPoints = new QTableView(centralWidget);
+        tabPoints = new QTableView(frame);
         tabPoints->setObjectName(QStringLiteral("tabPoints"));
         QSizePolicy sizePolicy3(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding);
         sizePolicy3.setHorizontalStretch(0);
@@ -117,24 +127,27 @@ public:
         sizePolicy3.setHeightForWidth(tabPoints->sizePolicy().hasHeightForWidth());
         tabPoints->setSizePolicy(sizePolicy3);
 
-        verticalLayout->addWidget(tabPoints);
+        verticalLayout_3->addWidget(tabPoints);
 
-        label_2 = new QLabel(centralWidget);
+        label_2 = new QLabel(frame);
         label_2->setObjectName(QStringLiteral("label_2"));
         sizePolicy2.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
         label_2->setSizePolicy(sizePolicy2);
 
-        verticalLayout->addWidget(label_2);
+        verticalLayout_3->addWidget(label_2);
 
-        tabSegments = new QTableView(centralWidget);
+        tabSegments = new QTableView(frame);
         tabSegments->setObjectName(QStringLiteral("tabSegments"));
         sizePolicy3.setHeightForWidth(tabSegments->sizePolicy().hasHeightForWidth());
         tabSegments->setSizePolicy(sizePolicy3);
 
-        verticalLayout->addWidget(tabSegments);
+        verticalLayout_3->addWidget(tabSegments);
 
 
-        horizontalLayout->addLayout(verticalLayout);
+        verticalLayout_4->addLayout(verticalLayout_3);
+
+
+        horizontalLayout->addWidget(frame);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
@@ -146,6 +159,7 @@ public:
         sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(areaDrawing->sizePolicy().hasHeightForWidth());
         areaDrawing->setSizePolicy(sizePolicy4);
+        areaDrawing->setMinimumSize(QSize(300, 300));
         areaDrawing->setBaseSize(QSize(530, 420));
 
         verticalLayout_2->addWidget(areaDrawing);
@@ -178,17 +192,22 @@ public:
 
         horizontalLayout->addLayout(verticalLayout_2);
 
-        horizontalSpacer = new QSpacerItem(250, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+        frame_2 = new QFrame(centralWidget);
+        frame_2->setObjectName(QStringLiteral("frame_2"));
+        frame_2->setMinimumSize(QSize(300, 0));
+        frame_2->setMaximumSize(QSize(250, 16777215));
+        frame_2->setFrameShape(QFrame::StyledPanel);
+        frame_2->setFrameShadow(QFrame::Raised);
 
-        horizontalLayout->addItem(horizontalSpacer);
+        horizontalLayout->addWidget(frame_2);
 
 
-        verticalLayout_3->addLayout(horizontalLayout);
+        verticalLayout->addLayout(horizontalLayout);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1042, 26));
+        menuBar->setGeometry(QRect(0, 0, 1058, 26));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));

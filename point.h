@@ -14,6 +14,7 @@ public:
     void setY(float y);
     float getX() const;
     float getY() const;
+    bool isBefore(Point* p) const;
 
 private:
     float m_x, m_y;

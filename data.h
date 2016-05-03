@@ -10,10 +10,13 @@ class Data
 {
 public:
     Data();
+    ~Data();
+
+    Triangulation* getTriangulation(int index) const;
 
 private:
-    std::vector<Triangulation> m_triangs;
-    std::vector<Point> m_points;
+    std::vector<Triangulation*> m_triangs;
+    std::vector<Point*> m_points;
 
 };
 
