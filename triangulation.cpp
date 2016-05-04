@@ -1,6 +1,8 @@
 #include "triangulation.h"
 
-Triangulation::Triangulation()
+Triangulation::Triangulation() :
+    m_points(),
+    m_segments()
 {
 }
 

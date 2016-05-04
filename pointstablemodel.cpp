@@ -77,7 +77,7 @@ bool PointsTableModel::setData(const QModelIndex &index, const QVariant &value, 
 }
 
 Qt::ItemFlags PointsTableModel::flags(const QModelIndex &index) const {
-    if(index.column() == 2) return Qt::ItemIsEnabled;
+    if(index.column() == 2) return Qt::NoItemFlags;
     return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
 }
 

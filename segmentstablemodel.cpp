@@ -1,6 +1,6 @@
 #include "segmentstablemodel.h"
 
-SegmentsTableModel::SegmentsTableModel(Triangulation *triang, QObject *parent) :
+SegmentsTableModel::SegmentsTableModel(Triangulation* triang, QObject *parent) :
     QAbstractTableModel(parent),
     m_triang(triang),
     m_headers({tr("P1"), tr("P2"), tr("actions")})
@@ -75,7 +75,7 @@ bool SegmentsTableModel::setData(const QModelIndex &index, const QVariant &value
 }
 
 Qt::ItemFlags SegmentsTableModel::flags(const QModelIndex &index) const {
-    if(index.column() == 2) return Qt::ItemIsEnabled;
+    if(index.column() == 2) return Qt::NoItemFlags;
     return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
 }
 
