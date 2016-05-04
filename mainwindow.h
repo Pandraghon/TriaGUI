@@ -6,6 +6,7 @@
 #include "data.h"
 #include "pointstablemodel.h"
 #include "segmentstablemodel.h"
+#include "renderarea.h"
 
 enum MODE { POINT, SEGMENT, SELECTION, SUPPRESSION };
 
@@ -23,10 +24,11 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    Data m_data;
-    MODE m_currentMode;
-    PointsTableModel* m_pointsTableModel;
-    SegmentsTableModel* m_segmentsTableModel;
+    Data data;
+    MODE currentMode;
+    PointsTableModel* pointsTableModel;
+    SegmentsTableModel* segmentsTableModel;
+    RenderArea* renderArea;
 };
 
 #endif // MAINWINDOW_H

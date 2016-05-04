@@ -45,7 +45,7 @@ public:
     QTableView *tabPoints;
     QLabel *label_2;
     QTableView *tabSegments;
-    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *drawingLayout;
     QWidget *areaDrawing;
     QHBoxLayout *horizontalLayout_2;
     QLabel *textMousePosition;
@@ -152,9 +152,9 @@ public:
 
         horizontalLayout->addWidget(frame);
 
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        drawingLayout = new QVBoxLayout();
+        drawingLayout->setSpacing(6);
+        drawingLayout->setObjectName(QStringLiteral("drawingLayout"));
         areaDrawing = new QWidget(centralWidget);
         areaDrawing->setObjectName(QStringLiteral("areaDrawing"));
         QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -165,7 +165,7 @@ public:
         areaDrawing->setMinimumSize(QSize(300, 300));
         areaDrawing->setBaseSize(QSize(530, 420));
 
-        verticalLayout_2->addWidget(areaDrawing);
+        drawingLayout->addWidget(areaDrawing);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
@@ -190,10 +190,10 @@ public:
         horizontalLayout_2->addWidget(textSelectedPointPosition);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_2);
+        drawingLayout->addLayout(horizontalLayout_2);
 
 
-        horizontalLayout->addLayout(verticalLayout_2);
+        horizontalLayout->addLayout(drawingLayout);
 
         frame_2 = new QFrame(centralWidget);
         frame_2->setObjectName(QStringLiteral("frame_2"));

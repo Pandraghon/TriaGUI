@@ -136,7 +136,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="drawingLayout">
         <item>
          <widget class="QWidget" name="areaDrawing" native="true">
           <property name="sizePolicy">

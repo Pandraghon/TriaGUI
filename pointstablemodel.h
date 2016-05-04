@@ -19,10 +19,13 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
 
     void setTriangulation(Triangulation* triang);
+    void checkPoint(const QModelIndex &index);
 
 private:
     Triangulation* m_triang;
     QString m_headers[3];
+    float m_newX, m_newY;
+    bool m_newXEmpty, m_newYEmpty;
 
 signals:
     void editCompleted(const QString &);

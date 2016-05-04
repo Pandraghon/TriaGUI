@@ -12,6 +12,7 @@ public:
     Data();
     ~Data();
 
+    std::vector<Triangulation*> getTriangulations() const;
     Triangulation* getTriangulation(int index) const;
 
 private:

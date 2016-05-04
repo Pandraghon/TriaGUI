@@ -4,21 +4,24 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    m_data(),
-    m_currentMode(POINT),
-    m_pointsTableModel(new PointsTableModel(m_data.getTriangulation(0))),
-    m_segmentsTableModel(new SegmentsTableModel(m_data.getTriangulation(0)))
+    data(),
+    currentMode(POINT),
+    pointsTableModel(new PointsTableModel(data.getTriangulation(0))),
+    segmentsTableModel(new SegmentsTableModel(data.getTriangulation(0))),
+    renderArea(new RenderArea(&data))
 {
     ui->setupUi(this);
-    ui->tabPoints->setModel(m_pointsTableModel);
+    ui->tabPoints->setModel(pointsTableModel);
     ui->tabPoints->horizontalHeader()->setAutoFillBackground(true);
     ui->tabPoints->horizontalHeader()->setDefaultSectionSize(75);
     ui->tabPoints->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
 
-    ui->tabSegments->setModel(m_segmentsTableModel);
+    ui->tabSegments->setModel(segmentsTableModel);
     ui->tabSegments->horizontalHeader()->setAutoFillBackground(true);
     ui->tabSegments->horizontalHeader()->setDefaultSectionSize(75);
     ui->tabSegments->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
+
+    ui->drawingLayout->addWidget(renderArea);
 }
 
 MainWindow::~MainWindow()
