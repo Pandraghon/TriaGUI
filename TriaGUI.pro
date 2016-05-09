@@ -22,7 +22,9 @@ SOURCES += main.cpp\
     data.cpp \
     segment.cpp \
     segmentstablemodel.cpp \
-    renderarea.cpp
+    renderarea.cpp \
+    graphicsscene.cpp \
+    pointitem.cpp
 
 HEADERS  += mainwindow.h \
     pointstablemodel.h \
@@ -31,7 +33,9 @@ HEADERS  += mainwindow.h \
     data.h \
     segment.h \
     segmentstablemodel.h \
-    renderarea.h
+    renderarea.h \
+    graphicsscene.h \
+    pointitem.h
 
 FORMS    += mainwindow.ui \
     pointstablemodel.ui

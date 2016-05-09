@@ -6,7 +6,7 @@
 #include "data.h"
 #include "pointstablemodel.h"
 #include "segmentstablemodel.h"
-#include "renderarea.h"
+#include "graphicsscene.h"
 
 enum MODE { POINT, SEGMENT, SELECTION, SUPPRESSION };
 
@@ -25,10 +25,16 @@ public:
 private:
     Ui::MainWindow *ui;
     Data data;
+    int currentTriang;
     MODE currentMode;
     PointsTableModel* pointsTableModel;
     SegmentsTableModel* segmentsTableModel;
-    RenderArea* renderArea;
+    GraphicsScene* graphicsScene;
+
+private slots:
+    void setMousePos(const QPointF &pos);
+    void addPoint(const QPointF &pos);
+
 };
 
 #endif // MAINWINDOW_H

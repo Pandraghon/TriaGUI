@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -46,7 +47,7 @@ public:
     QLabel *label_2;
     QTableView *tabSegments;
     QVBoxLayout *drawingLayout;
-    QWidget *areaDrawing;
+    QGraphicsView *areaDrawing;
     QHBoxLayout *horizontalLayout_2;
     QLabel *textMousePosition;
     QSpacerItem *horizontalSpacer_2;
@@ -155,15 +156,10 @@ public:
         drawingLayout = new QVBoxLayout();
         drawingLayout->setSpacing(6);
         drawingLayout->setObjectName(QStringLiteral("drawingLayout"));
-        areaDrawing = new QWidget(centralWidget);
+        areaDrawing = new QGraphicsView(centralWidget);
         areaDrawing->setObjectName(QStringLiteral("areaDrawing"));
-        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(areaDrawing->sizePolicy().hasHeightForWidth());
-        areaDrawing->setSizePolicy(sizePolicy4);
         areaDrawing->setMinimumSize(QSize(300, 300));
-        areaDrawing->setBaseSize(QSize(530, 420));
+        areaDrawing->setMouseTracking(false);
 
         drawingLayout->addWidget(areaDrawing);
 

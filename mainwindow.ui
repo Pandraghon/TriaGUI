@@ -138,24 +138,15 @@
       <item>
        <layout class="QVBoxLayout" name="drawingLayout">
         <item>
-         <widget class="QWidget" name="areaDrawing" native="true">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
+         <widget class="QGraphicsView" name="areaDrawing">
           <property name="minimumSize">
            <size>
             <width>300</width>
             <height>300</height>
            </size>
           </property>
-          <property name="baseSize">
-           <size>
-            <width>530</width>
-            <height>420</height>
-           </size>
+          <property name="mouseTracking">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
