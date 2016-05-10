@@ -6,12 +6,11 @@ PointItem::PointItem(Point* point, QGraphicsItem *parent) :
 {
 }
 
-QRectF PointItem::boundingRect() const
-{
-    return QRectF(0, 0, boundSize, boundSize);
+QRectF PointItem::boundingRect() const {
+    return QRectF(point->getX() - rad, point->getY() - rad, rad * 2, rad * 2);
 }
 
-void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/, QWidget * /*widget*/)
-{
-    painter->drawPoint(point->getX(), point->getY());
+void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/, QWidget * /*widget*/) {
+    painter->setBrush(Qt::SolidPattern);
+    painter->drawEllipse(boundingRect());
 }

@@ -6,6 +6,7 @@
 #include "data.h"
 #include "pointstablemodel.h"
 #include "segmentstablemodel.h"
+#include "graphicsview.h"
 #include "graphicsscene.h"
 
 enum MODE { POINT, SEGMENT, SELECTION, SUPPRESSION };
@@ -30,9 +31,10 @@ private:
     PointsTableModel* pointsTableModel;
     SegmentsTableModel* segmentsTableModel;
     GraphicsScene* graphicsScene;
+    GraphicsView* graphicsView;
 
 private slots:
-    void setMousePos(const QPointF &pos);
+    void setMousePosText(const QPointF &pos);
     void addPoint(const QPointF &pos);
 
 };

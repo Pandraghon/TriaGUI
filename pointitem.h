@@ -9,6 +9,7 @@
 class PointItem : public QGraphicsItem {
 public:
     static const int boundSize = 20;
+    static const int rad = 1;
 
     explicit PointItem(Point* point, QGraphicsItem *parent = 0);
 

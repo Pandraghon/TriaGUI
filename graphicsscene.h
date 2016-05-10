@@ -7,6 +7,7 @@
 
 #include "data.h"
 #include "pointitem.h"
+#include "point.h"
 
 class GraphicsScene : public QGraphicsScene
 {
@@ -15,6 +16,7 @@ public:
     enum MODE { POINT, SEGMENT, SELECTION, SUPPRESSION };
 
     explicit GraphicsScene(Data *data, QObject *parent = 0);
+    void addPoint(Point *p, const QColor& color);
 
 private:
     Data *data;

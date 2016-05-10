@@ -7,9 +7,15 @@ GraphicsScene::GraphicsScene(Data *data, QObject *parent) :
     data(data),
     mode(POINT)
 {
-    setSceneRect(-1, -1, 2, 2);
+    setSceneRect(-300, -300, 600, 600);
 
     paint();
+}
+
+void GraphicsScene::addPoint(Point* p, const QColor &color) {
+    qDebug() << Q_FUNC_INFO << p << " " << color;
+
+    addItem(new PointItem(p));
 }
 
 void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {

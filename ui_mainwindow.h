@@ -15,7 +15,6 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -47,7 +46,6 @@ public:
     QLabel *label_2;
     QTableView *tabSegments;
     QVBoxLayout *drawingLayout;
-    QGraphicsView *areaDrawing;
     QHBoxLayout *horizontalLayout_2;
     QLabel *textMousePosition;
     QSpacerItem *horizontalSpacer_2;
@@ -156,13 +154,6 @@ public:
         drawingLayout = new QVBoxLayout();
         drawingLayout->setSpacing(6);
         drawingLayout->setObjectName(QStringLiteral("drawingLayout"));
-        areaDrawing = new QGraphicsView(centralWidget);
-        areaDrawing->setObjectName(QStringLiteral("areaDrawing"));
-        areaDrawing->setMinimumSize(QSize(300, 300));
-        areaDrawing->setMouseTracking(false);
-
-        drawingLayout->addWidget(areaDrawing);
-
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
@@ -210,6 +201,7 @@ public:
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
+        mainToolBar->setMovable(false);
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
