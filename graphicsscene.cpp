@@ -7,7 +7,7 @@ GraphicsScene::GraphicsScene(Data *data, QObject *parent) :
     data(data),
     mode(POINT)
 {
-    setSceneRect(-300, -300, 600, 600);
+    setSceneRect(-3000, -3000, 6000, 6000);
 
     paint();
 }

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QActionGroup>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -27,8 +28,20 @@ MainWindow::MainWindow(QWidget *parent) :
     graphicsView->setScene(graphicsScene);
     ui->drawingLayout->insertWidget(0, graphicsView);
 
+    QActionGroup* ag = new QActionGroup(this);
+    ag->addAction(ui->actionSelection);
+    ag->addAction(ui->actionPoint);
+    ag->addAction(ui->actionSegment);
+    ag->addAction(ui->actionSuppression);
+    ui->mainToolBar->addActions(ag->actions());
+
     QObject::connect(graphicsScene, &GraphicsScene::mouseMoved, this, &MainWindow::setMousePosText);
     QObject::connect(graphicsScene, &GraphicsScene::pointClicked, this, &MainWindow::addPoint);
+
+    // Toolbar
+    QObject::connect(ui->actionZoom, &QAction::triggered, graphicsView, &GraphicsView::zoomIn);
+    QObject::connect(ui->actionZoom_2, &QAction::triggered, graphicsView, &GraphicsView::zoomOut);
+    QObject::connect(ui->actionRecentrer, &QAction::triggered, graphicsView, &GraphicsView::center);
 }
 
 MainWindow::~MainWindow()

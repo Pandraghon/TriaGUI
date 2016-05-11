@@ -41,3 +41,6 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     pointstablemodel.ui
+
+RESOURCES += \
+    resource.qrc

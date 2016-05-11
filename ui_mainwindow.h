@@ -19,6 +19,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
@@ -32,6 +33,20 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionNouveau;
+    QAction *actionEnregistrer;
+    QAction *actionEnregistrer_sous;
+    QAction *actionOuvrir;
+    QAction *actionExporter;
+    QAction *actionImporter;
+    QAction *actionSelection;
+    QAction *actionPoint;
+    QAction *actionSegment;
+    QAction *actionSuppression;
+    QAction *actionTout_effacer;
+    QAction *actionZoom;
+    QAction *actionZoom_2;
+    QAction *actionRecentrer;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
@@ -53,8 +68,11 @@ public:
     QLabel *textSelectedPointPosition;
     QFrame *frame_2;
     QMenuBar *menuBar;
-    QToolBar *mainToolBar;
+    QMenu *menuFichier;
+    QMenu *menuDessin;
+    QMenu *menuMode;
     QStatusBar *statusBar;
+    QToolBar *mainToolBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -62,6 +80,75 @@ public:
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1058, 669);
         MainWindow->setBaseSize(QSize(530, 420));
+        actionNouveau = new QAction(MainWindow);
+        actionNouveau->setObjectName(QStringLiteral("actionNouveau"));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_sheet.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionNouveau->setIcon(icon);
+        actionEnregistrer = new QAction(MainWindow);
+        actionEnregistrer->setObjectName(QStringLiteral("actionEnregistrer"));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_floppydisk.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionEnregistrer->setIcon(icon1);
+        actionEnregistrer_sous = new QAction(MainWindow);
+        actionEnregistrer_sous->setObjectName(QStringLiteral("actionEnregistrer_sous"));
+        actionOuvrir = new QAction(MainWindow);
+        actionOuvrir->setObjectName(QStringLiteral("actionOuvrir"));
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_folder.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionOuvrir->setIcon(icon2);
+        actionExporter = new QAction(MainWindow);
+        actionExporter->setObjectName(QStringLiteral("actionExporter"));
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_download.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionExporter->setIcon(icon3);
+        actionImporter = new QAction(MainWindow);
+        actionImporter->setObjectName(QStringLiteral("actionImporter"));
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_upload.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionImporter->setIcon(icon4);
+        actionSelection = new QAction(MainWindow);
+        actionSelection->setObjectName(QStringLiteral("actionSelection"));
+        actionSelection->setCheckable(true);
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_mouse.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSelection->setIcon(icon5);
+        actionPoint = new QAction(MainWindow);
+        actionPoint->setObjectName(QStringLiteral("actionPoint"));
+        actionPoint->setCheckable(true);
+        actionPoint->setChecked(true);
+        QIcon icon6;
+        icon6.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/software_pencil.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionPoint->setIcon(icon6);
+        actionSegment = new QAction(MainWindow);
+        actionSegment->setObjectName(QStringLiteral("actionSegment"));
+        actionSegment->setCheckable(true);
+        QIcon icon7;
+        icon7.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_pencil_ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSegment->setIcon(icon7);
+        actionSuppression = new QAction(MainWindow);
+        actionSuppression->setObjectName(QStringLiteral("actionSuppression"));
+        actionSuppression->setCheckable(true);
+        QIcon icon8;
+        icon8.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/software_slice.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSuppression->setIcon(icon8);
+        actionTout_effacer = new QAction(MainWindow);
+        actionTout_effacer->setObjectName(QStringLiteral("actionTout_effacer"));
+        actionZoom = new QAction(MainWindow);
+        actionZoom->setObjectName(QStringLiteral("actionZoom"));
+        QIcon icon9;
+        icon9.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_magnifier_plus.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionZoom->setIcon(icon9);
+        actionZoom_2 = new QAction(MainWindow);
+        actionZoom_2->setObjectName(QStringLiteral("actionZoom_2"));
+        QIcon icon10;
+        icon10.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_magnifier_minus.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionZoom_2->setIcon(icon10);
+        actionRecentrer = new QAction(MainWindow);
+        actionRecentrer->setObjectName(QStringLiteral("actionRecentrer"));
+        QIcon icon11;
+        icon11.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_gunsight.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionRecentrer->setIcon(icon11);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -198,14 +285,56 @@ public:
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1058, 26));
+        menuFichier = new QMenu(menuBar);
+        menuFichier->setObjectName(QStringLiteral("menuFichier"));
+        menuDessin = new QMenu(menuBar);
+        menuDessin->setObjectName(QStringLiteral("menuDessin"));
+        menuMode = new QMenu(menuDessin);
+        menuMode->setObjectName(QStringLiteral("menuMode"));
         MainWindow->setMenuBar(menuBar);
+        statusBar = new QStatusBar(MainWindow);
+        statusBar->setObjectName(QStringLiteral("statusBar"));
+        MainWindow->setStatusBar(statusBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         mainToolBar->setMovable(false);
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        statusBar = new QStatusBar(MainWindow);
-        statusBar->setObjectName(QStringLiteral("statusBar"));
-        MainWindow->setStatusBar(statusBar);
+
+        menuBar->addAction(menuFichier->menuAction());
+        menuBar->addAction(menuDessin->menuAction());
+        menuFichier->addAction(actionNouveau);
+        menuFichier->addAction(actionOuvrir);
+        menuFichier->addSeparator();
+        menuFichier->addAction(actionEnregistrer);
+        menuFichier->addAction(actionEnregistrer_sous);
+        menuFichier->addSeparator();
+        menuFichier->addAction(actionExporter);
+        menuFichier->addAction(actionImporter);
+        menuDessin->addAction(actionTout_effacer);
+        menuDessin->addAction(menuMode->menuAction());
+        menuDessin->addSeparator();
+        menuDessin->addAction(actionZoom);
+        menuDessin->addAction(actionZoom_2);
+        menuDessin->addAction(actionRecentrer);
+        menuMode->addAction(actionSelection);
+        menuMode->addAction(actionPoint);
+        menuMode->addAction(actionSegment);
+        menuMode->addAction(actionSuppression);
+        mainToolBar->addAction(actionNouveau);
+        mainToolBar->addAction(actionOuvrir);
+        mainToolBar->addAction(actionEnregistrer);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionExporter);
+        mainToolBar->addAction(actionImporter);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionZoom);
+        mainToolBar->addAction(actionZoom_2);
+        mainToolBar->addAction(actionRecentrer);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionSelection);
+        mainToolBar->addAction(actionPoint);
+        mainToolBar->addAction(actionSegment);
+        mainToolBar->addAction(actionSuppression);
 
         retranslateUi(MainWindow);
 
@@ -215,6 +344,23 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        actionNouveau->setText(QApplication::translate("MainWindow", "Nouveau", 0));
+        actionEnregistrer->setText(QApplication::translate("MainWindow", "Enregistrer", 0));
+        actionEnregistrer_sous->setText(QApplication::translate("MainWindow", "Enregistrer sous ...", 0));
+        actionOuvrir->setText(QApplication::translate("MainWindow", "Ouvrir", 0));
+        actionExporter->setText(QApplication::translate("MainWindow", "Exporter", 0));
+        actionImporter->setText(QApplication::translate("MainWindow", "Importer", 0));
+        actionSelection->setText(QApplication::translate("MainWindow", "Selection", 0));
+        actionPoint->setText(QApplication::translate("MainWindow", "Point", 0));
+        actionPoint->setShortcut(QApplication::translate("MainWindow", "P", 0));
+        actionSegment->setText(QApplication::translate("MainWindow", "Segment", 0));
+        actionSegment->setShortcut(QApplication::translate("MainWindow", "S", 0));
+        actionSuppression->setText(QApplication::translate("MainWindow", "Suppression", 0));
+        actionSuppression->setShortcut(QApplication::translate("MainWindow", "D", 0));
+        actionTout_effacer->setText(QApplication::translate("MainWindow", "Tout effacer", 0));
+        actionZoom->setText(QApplication::translate("MainWindow", "Zoom +", 0));
+        actionZoom_2->setText(QApplication::translate("MainWindow", "Zoom -", 0));
+        actionRecentrer->setText(QApplication::translate("MainWindow", "Recentrer", 0));
         label_3->setText(QApplication::translate("MainWindow", "Triangulation : ", 0));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
@@ -225,6 +371,9 @@ public:
         textMousePosition->setText(QApplication::translate("MainWindow", "(x;y)", 0));
         textSelectedPointName->setText(QApplication::translate("MainWindow", "P1", 0));
         textSelectedPointPosition->setText(QApplication::translate("MainWindow", "(x;y)", 0));
+        menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", 0));
+        menuDessin->setTitle(QApplication::translate("MainWindow", "Dessin", 0));
+        menuMode->setTitle(QApplication::translate("MainWindow", "Mode", 0));
     } // retranslateUi
 
 };
