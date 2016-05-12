@@ -6,16 +6,27 @@ PointItem::PointItem(Point* point, QGraphicsItem *parent) :
     QGraphicsItem(parent),
     point(point)
 {
-    //setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
+    setFlags(QGraphicsItem::ItemIsSelectable);
+    //setFlags(QGraphicsItem::ItemIgnoresTransformations);
 }
 
 QRectF PointItem::boundingRect() const {
-    return QRectF(point->getX() - rad, point->getY() - rad, rad * 2, rad * 2);
+    return QRectF(point->getX() - rad - 1, point->getY() - rad - 1, (rad + 1) * 2, (rad + 1) * 2);//rect;
 }
 
 void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/, QWidget * /*widget*/) {
     painter->setBrush(Qt::SolidPattern);
+    // @see http://stackoverflow.com/a/24874013
+    QTransform t = painter->transform();
+    qreal m11 = t.m11(), m22 = t.m22();
     qDebug() << Q_FUNC_INFO << scale();
-    qDebug() << painter->transform().m11() << " " << painter->transform().m22();
-    painter->drawEllipse(boundingRect());
+    qDebug() << m11 << " " << m22;
+    painter->save();
+    painter->setTransform(QTransform(1, t.m12(), t.m13(),
+                                         t.m21(), 1, t.m23(), t.m31(),
+                                         t.m32(), t.m33()));
+    //rect = QRectF((point->getX() - rad) * m11, (point->getY() - rad) * m22, rad * 2, rad * 2);
+    qDebug() << Q_FUNC_INFO << rect;
+    painter->drawEllipse((point->getX() - rad) * m11, (point->getY() - rad) * m22, rad * 2, rad * 2);
+    painter->restore();
 }

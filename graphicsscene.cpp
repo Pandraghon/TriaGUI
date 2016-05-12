@@ -55,3 +55,8 @@ void GraphicsScene::paint() {
     }
 
 }
+
+void GraphicsScene::setSelectionMode()
+{
+    mode = SELECTION;
+}

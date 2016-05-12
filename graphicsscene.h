@@ -35,6 +35,7 @@ signals:
     void segmentClicked(const QPointF& pos);
 
 public slots:
+    void setSelectionMode();
 
 };
 

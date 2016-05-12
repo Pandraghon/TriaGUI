@@ -14,6 +14,8 @@ public:
 protected:
     virtual void wheelEvent(QWheelEvent* event) Q_DECL_OVERRIDE;
 
+    void afterZoom();
+
     bool wheel;
 
 signals:

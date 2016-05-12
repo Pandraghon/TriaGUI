@@ -42,6 +42,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionZoom, &QAction::triggered, graphicsView, &GraphicsView::zoomIn);
     QObject::connect(ui->actionZoom_2, &QAction::triggered, graphicsView, &GraphicsView::zoomOut);
     QObject::connect(ui->actionRecentrer, &QAction::triggered, graphicsView, &GraphicsView::center);
+    QObject::connect(ui->actionSelection, &QAction::triggered, graphicsScene, &GraphicsScene::setSelectionMode);
+            // @see http://stackoverflow.com/questions/27188538/how-to-delete-qgraphicsitem-properly
 }
 
 MainWindow::~MainWindow()
