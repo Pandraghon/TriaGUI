@@ -18,7 +18,6 @@ public:
 
 private:
     Point* point;
-    QRectF rect;
 
 signals:
 

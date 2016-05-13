@@ -5,8 +5,12 @@ Data::Data() :
     m_points()
 {
     m_triangs[0]->addPoint(new Point());
-    m_triangs[0]->addPoint(new Point(1, 5));
-    m_triangs[0]->addPoint(new Point(1, 1));
+    m_triangs[0]->addPoint(new Point(10, 10));
+    m_triangs[0]->addPoint(new Point(10, 0));
+    m_triangs[0]->addPoint(new Point(0, 10));
+    m_triangs[0]->addPoint(new Point(-10, -10));
+    m_triangs[0]->addPoint(new Point(-10, 0));
+    m_triangs[0]->addPoint(new Point(0, -10));
 }
 
 Data::~Data() {

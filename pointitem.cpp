@@ -11,7 +11,7 @@ PointItem::PointItem(Point* point, QGraphicsItem *parent) :
 }
 
 QRectF PointItem::boundingRect() const {
-    return QRectF(point->getX() - rad - 1, point->getY() - rad - 1, (rad + 1) * 2, (rad + 1) * 2);//rect;
+    return QRectF(point->getX() - rad, point->getY() - rad, rad * 2, rad * 2);
 }
 
 void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/, QWidget * /*widget*/) {
@@ -25,8 +25,6 @@ void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*opti
     painter->setTransform(QTransform(1, t.m12(), t.m13(),
                                          t.m21(), 1, t.m23(), t.m31(),
                                          t.m32(), t.m33()));
-    //rect = QRectF((point->getX() - rad) * m11, (point->getY() - rad) * m22, rad * 2, rad * 2);
-    qDebug() << Q_FUNC_INFO << rect;
-    painter->drawEllipse((point->getX() - rad) * m11, (point->getY() - rad) * m22, rad * 2, rad * 2);
+    painter->drawEllipse(point->getX() * m11 - rad, point->getY() * m22 - rad, rad * 2, rad * 2);
     painter->restore();
 }

@@ -244,6 +244,7 @@
     <addaction name="actionZoom"/>
     <addaction name="actionZoom_2"/>
     <addaction name="actionRecentrer"/>
+    <addaction name="actionR_initialiser"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuDessin"/>
@@ -269,6 +270,7 @@
    <addaction name="actionZoom"/>
    <addaction name="actionZoom_2"/>
    <addaction name="actionRecentrer"/>
+   <addaction name="actionR_initialiser"/>
    <addaction name="separator"/>
    <addaction name="actionSelection"/>
    <addaction name="actionPoint"/>
@@ -415,6 +417,15 @@
    </property>
    <property name="text">
     <string>Recentrer</string>
+   </property>
+  </action>
+  <action name="actionR_initialiser">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/Desktop/_PNG 64_/basic_target.png</normaloff>:/images/Desktop/_PNG 64_/basic_target.png</iconset>
+   </property>
+   <property name="text">
+    <string>Réinitialiser</string>
    </property>
   </action>
  </widget>

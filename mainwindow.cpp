@@ -42,12 +42,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionZoom, &QAction::triggered, graphicsView, &GraphicsView::zoomIn);
     QObject::connect(ui->actionZoom_2, &QAction::triggered, graphicsView, &GraphicsView::zoomOut);
     QObject::connect(ui->actionRecentrer, &QAction::triggered, graphicsView, &GraphicsView::center);
+    QObject::connect(ui->actionR_initialiser, &QAction::triggered, graphicsView, &GraphicsView::likeANewBorn);
     QObject::connect(ui->actionSelection, &QAction::triggered, graphicsScene, &GraphicsScene::setSelectionMode);
             // @see http://stackoverflow.com/questions/27188538/how-to-delete-qgraphicsitem-properly
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
@@ -61,5 +61,4 @@ void MainWindow::addPoint(const QPointF &pos) {
     this->data.getTriangulation(this->currentTriang)->addPoint(p);
     ui->tabPoints->model()->layoutChanged();
     graphicsScene->addPoint(p, Qt::blue);
-    //ui->areaDrawing->repaint();
 }

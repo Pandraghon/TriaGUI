@@ -47,6 +47,7 @@ public:
     QAction *actionZoom;
     QAction *actionZoom_2;
     QAction *actionRecentrer;
+    QAction *actionR_initialiser;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
@@ -149,6 +150,11 @@ public:
         QIcon icon11;
         icon11.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_gunsight.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRecentrer->setIcon(icon11);
+        actionR_initialiser = new QAction(MainWindow);
+        actionR_initialiser->setObjectName(QStringLiteral("actionR_initialiser"));
+        QIcon icon12;
+        icon12.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_target.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionR_initialiser->setIcon(icon12);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -316,6 +322,7 @@ public:
         menuDessin->addAction(actionZoom);
         menuDessin->addAction(actionZoom_2);
         menuDessin->addAction(actionRecentrer);
+        menuDessin->addAction(actionR_initialiser);
         menuMode->addAction(actionSelection);
         menuMode->addAction(actionPoint);
         menuMode->addAction(actionSegment);
@@ -330,6 +337,7 @@ public:
         mainToolBar->addAction(actionZoom);
         mainToolBar->addAction(actionZoom_2);
         mainToolBar->addAction(actionRecentrer);
+        mainToolBar->addAction(actionR_initialiser);
         mainToolBar->addSeparator();
         mainToolBar->addAction(actionSelection);
         mainToolBar->addAction(actionPoint);
@@ -361,6 +369,7 @@ public:
         actionZoom->setText(QApplication::translate("MainWindow", "Zoom +", 0));
         actionZoom_2->setText(QApplication::translate("MainWindow", "Zoom -", 0));
         actionRecentrer->setText(QApplication::translate("MainWindow", "Recentrer", 0));
+        actionR_initialiser->setText(QApplication::translate("MainWindow", "R\303\251initialiser", 0));
         label_3->setText(QApplication::translate("MainWindow", "Triangulation : ", 0));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
