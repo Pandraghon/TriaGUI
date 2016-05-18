@@ -21,6 +21,7 @@ public:
 private:
     Data *data;
     MODE mode;
+    QVector<QColor> colorOfTriangulation;
 
     void clickOnSelection(const QPointF& pos);
 
@@ -34,8 +35,12 @@ signals:
     void pointClicked(const QPointF& pos);
     void segmentClicked(const QPointF& pos);
 
+
+
 public slots:
     void setSelectionMode();
+
+    void setColor(int indexTriangulation, const QColor& color);
 
 };
 

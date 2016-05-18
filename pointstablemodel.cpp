@@ -1,6 +1,7 @@
 #include "pointstablemodel.h"
 
 #include <QDebug>
+#include <QPointF>
 
 PointsTableModel::PointsTableModel(Triangulation *triang, QObject *parent) :
     QAbstractTableModel(parent),
@@ -73,6 +74,7 @@ bool PointsTableModel::setData(const QModelIndex &index, const QVariant &value, 
         if(value.toString() == "") return false;
         float v = value.toFloat();
         if(row < m_triang->getPoints().size()) {
+            Point former = *m_triang->getPoint(row);
             switch(col) {
             case 0:
                 m_triang->getPoint(row)->setX(v);
@@ -81,6 +83,7 @@ bool PointsTableModel::setData(const QModelIndex &index, const QVariant &value, 
                 m_triang->getPoint(row)->setY(v);
                 break;
             }
+            emit valuesChanged(former, *m_triang->getPoint(row));
         } else {
             switch(col) {
             case 0:
@@ -112,8 +115,11 @@ void PointsTableModel::setTriangulation(Triangulation* triang) {
 void PointsTableModel::checkPoint(const QModelIndex& index) {
     if(m_newXEmpty || m_newYEmpty) return;
 
-    m_triang->addPoint(new Point(m_newX, m_newY));
+    //Point* p = new Point(m_newX, m_newY);
+    //m_triang->addPoint(p);
     m_newXEmpty = true;
     m_newYEmpty = true;
+
+    emit pointAdded(QPointF(m_newX, m_newY));
     emit layoutChanged();
 }

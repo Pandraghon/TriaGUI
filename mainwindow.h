@@ -36,6 +36,8 @@ private:
 private slots:
     void setMousePosText(const QPointF &pos);
     void addPoint(const QPointF &pos);
+    void redraw(const Point &p1, const Point &p2);
+    void changeColor();
 
 };
 

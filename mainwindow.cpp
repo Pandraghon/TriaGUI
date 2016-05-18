@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <QActionGroup>
+#include <QColorDialog>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -38,6 +39,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(graphicsScene, &GraphicsScene::mouseMoved, this, &MainWindow::setMousePosText);
     QObject::connect(graphicsScene, &GraphicsScene::pointClicked, this, &MainWindow::addPoint);
 
+    QObject::connect(pointsTableModel, &PointsTableModel::valuesChanged, this, &MainWindow::redraw);
+    QObject::connect(pointsTableModel, &PointsTableModel::pointAdded, this, &MainWindow::addPoint);
+
+    QObject::connect(ui->colorButton, &QPushButton::clicked, this, &MainWindow::changeColor);
+
     // Toolbar
     QObject::connect(ui->actionZoom, &QAction::triggered, graphicsView, &GraphicsView::zoomIn);
     QObject::connect(ui->actionZoom_2, &QAction::triggered, graphicsView, &GraphicsView::zoomOut);
@@ -61,4 +67,25 @@ void MainWindow::addPoint(const QPointF &pos) {
     this->data.getTriangulation(this->currentTriang)->addPoint(p);
     ui->tabPoints->model()->layoutChanged();
     graphicsScene->addPoint(p, Qt::blue);
+}
+
+void MainWindow::redraw(const Point& p1, const Point& p2) {
+    QPointF b1(std::min(p1.getX(), p2.getX()) - PointItem::rad, std::min(p1.getY(), p2.getY()) - PointItem::rad),
+            b2(std::max(p1.getX(), p2.getX()) + PointItem::rad, std::max(p1.getY(), p2.getY()) + PointItem::rad);
+    graphicsScene->update(QRectF(b1, b2));
+    //graphicsView->zoom(2.0);
+    //graphicsView->zoom(0.5);
+}
+
+void MainWindow::changeColor() {
+    qDebug() << Q_FUNC_INFO << "Graaaaaah";
+    QColor color = QColorDialog::getColor();
+    if(!color.isValid()) return;
+//    QPalette p = ui->colorButton->palette();
+//    p.setColor(QPalette::Button, color);
+//    ui->colorButton->setAutoFillBackground(true);
+//    ui->colorButton->setPalette(p);
+//    ui->colorButton->update();
+    QString qss = QString("background-color: %1").arg(color.name());
+    ui->colorButton->setStyleSheet(qss);
 }

@@ -5,7 +5,8 @@
 GraphicsScene::GraphicsScene(Data *data, QObject *parent) :
     QGraphicsScene(parent),
     data(data),
-    mode(POINT)
+    mode(POINT),
+    colorOfTriangulation(1, Qt::green)
 {
     setSceneRect(-3000, -3000, 6000, 6000);
 
@@ -23,20 +24,28 @@ void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 }
 
 void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
-    switch(this->mode) {
-        case POINT:
-            emit pointClicked(event->scenePos());
-            break;
-        case SEGMENT:
-            emit segmentClicked(event->scenePos());
-            break;
-        case SELECTION:
-            clickOnSelection(event->scenePos());
-            break;
-        case SUPPRESSION:
+    switch(event->button()) {
+    case Qt::LeftButton:
+        switch(this->mode) {
+            case POINT:
+                emit pointClicked(event->scenePos());
+                break;
+            case SEGMENT:
+                emit segmentClicked(event->scenePos());
+                break;
+            case SUPPRESSION:
 
-            break;
+                break;
+        }
+        break;
+    case Qt::RightButton:
+        clickOnSelection(event->scenePos());
+        break;
+    case Qt::MiddleButton:
+        //translate
+        break;
     }
+
 }
 
 void GraphicsScene::clickOnSelection(const QPointF &pos) {
@@ -56,7 +65,11 @@ void GraphicsScene::paint() {
 
 }
 
-void GraphicsScene::setSelectionMode()
-{
+void GraphicsScene::setSelectionMode() {
     mode = SELECTION;
+}
+
+void GraphicsScene::setColor(int indexTriangulation, const QColor &color) {
+    colorOfTriangulation[indexTriangulation] = color;
+
 }

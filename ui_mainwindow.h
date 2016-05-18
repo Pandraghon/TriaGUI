@@ -13,14 +13,17 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableView>
@@ -68,6 +71,11 @@ public:
     QLabel *textSelectedPointName;
     QLabel *textSelectedPointPosition;
     QFrame *frame_2;
+    QGroupBox *groupBox;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout_2;
+    QCheckBox *isVisible;
+    QPushButton *colorButton;
     QMenuBar *menuBar;
     QMenu *menuFichier;
     QMenu *menuDessin;
@@ -281,6 +289,32 @@ public:
         frame_2->setMaximumSize(QSize(300, 16777215));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
+        groupBox = new QGroupBox(frame_2);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
+        groupBox->setGeometry(QRect(30, 240, 146, 118));
+        widget = new QWidget(groupBox);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(40, 30, 66, 58));
+        verticalLayout_2 = new QVBoxLayout(widget);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        isVisible = new QCheckBox(widget);
+        isVisible->setObjectName(QStringLiteral("isVisible"));
+        isVisible->setChecked(true);
+
+        verticalLayout_2->addWidget(isVisible);
+
+        colorButton = new QPushButton(widget);
+        colorButton->setObjectName(QStringLiteral("colorButton"));
+        colorButton->setAutoFillBackground(true);
+        QIcon icon13;
+        icon13.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/software_paintbrush.png"), QSize(), QIcon::Normal, QIcon::Off);
+        colorButton->setIcon(icon13);
+
+        verticalLayout_2->addWidget(colorButton);
+
 
         horizontalLayout->addWidget(frame_2);
 
@@ -380,6 +414,9 @@ public:
         textMousePosition->setText(QApplication::translate("MainWindow", "(x;y)", 0));
         textSelectedPointName->setText(QApplication::translate("MainWindow", "P1", 0));
         textSelectedPointPosition->setText(QApplication::translate("MainWindow", "(x;y)", 0));
+        groupBox->setTitle(QApplication::translate("MainWindow", "Triangulation courante :", 0));
+        isVisible->setText(QApplication::translate("MainWindow", "Visible", 0));
+        colorButton->setText(QString());
         menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", 0));
         menuDessin->setTitle(QApplication::translate("MainWindow", "Dessin", 0));
         menuMode->setTitle(QApplication::translate("MainWindow", "Mode", 0));

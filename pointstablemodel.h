@@ -29,6 +29,8 @@ private:
 
 signals:
     void editCompleted(const QString &);
+    void pointAdded(const QPointF& p);
+    void valuesChanged(const Point& p1, const Point& p2);
 };
 
 #endif // POINTSTABLEMODEL_H

@@ -14,7 +14,6 @@ public:
 protected:
     virtual void wheelEvent(QWheelEvent* event) Q_DECL_OVERRIDE;
 
-    void zoom(double factor);
 
     bool wheel;
     double scaleFactor;
@@ -22,6 +21,7 @@ protected:
 signals:
 
 public slots:
+    void zoom(double factor);
     void zoomIn();
     void zoomOut();
     void center();
