@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QActionGroup>
 #include <QColorDialog>
 #include <QDebug>
+#include <QSettings>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     pointsTableModel(new PointsTableModel(data.getTriangulation(currentTriang))),
     segmentsTableModel(new SegmentsTableModel(data.getTriangulation(currentTriang))),
     graphicsScene(new GraphicsScene(&data)),
-    graphicsView(new GraphicsView())
+    graphicsView(new GraphicsView()),
+    actionGroup(new QActionGroup(this))
 {
     ui->setupUi(this);
 
@@ -29,26 +30,32 @@ MainWindow::MainWindow(QWidget *parent) :
     graphicsView->setScene(graphicsScene);
     ui->drawingLayout->insertWidget(0, graphicsView);
 
-    QActionGroup* ag = new QActionGroup(this);
-    ag->addAction(ui->actionSelection);
-    ag->addAction(ui->actionPoint);
-    ag->addAction(ui->actionSegment);
-    ag->addAction(ui->actionSuppression);
-    ui->mainToolBar->addActions(ag->actions());
+    actionGroup->addAction(ui->actionSelection);
+    actionGroup->addAction(ui->actionPoint);
+    actionGroup->addAction(ui->actionSegment);
+    actionGroup->addAction(ui->actionSuppression);
+    ui->mainToolBar->addActions(actionGroup->actions());
+
+    changeColor(Qt::green);
 
     QObject::connect(graphicsScene, &GraphicsScene::mouseMoved, this, &MainWindow::setMousePosText);
     QObject::connect(graphicsScene, &GraphicsScene::pointClicked, this, &MainWindow::addPoint);
+    QObject::connect(graphicsScene, &GraphicsScene::viewDragged, graphicsView, &GraphicsView::drag);
 
     QObject::connect(pointsTableModel, &PointsTableModel::valuesChanged, this, &MainWindow::redraw);
     QObject::connect(pointsTableModel, &PointsTableModel::pointAdded, this, &MainWindow::addPoint);
 
-    QObject::connect(ui->colorButton, &QPushButton::clicked, this, &MainWindow::changeColor);
+    QObject::connect(ui->colorButton, &QPushButton::clicked, this, &MainWindow::chooseColor);
+    QObject::connect(ui->isVisible, &QCheckBox::clicked, this, &MainWindow::manageVisibility);
 
     // Toolbar
+    QObject::connect(ui->actionEnregistrer, &QAction::triggered, this, &MainWindow::save);
+    QObject::connect(ui->actionOuvrir, &QAction::triggered, this, &MainWindow::readSettings);
     QObject::connect(ui->actionZoom, &QAction::triggered, graphicsView, &GraphicsView::zoomIn);
     QObject::connect(ui->actionZoom_2, &QAction::triggered, graphicsView, &GraphicsView::zoomOut);
     QObject::connect(ui->actionRecentrer, &QAction::triggered, graphicsView, &GraphicsView::center);
     QObject::connect(ui->actionR_initialiser, &QAction::triggered, graphicsView, &GraphicsView::likeANewBorn);
+    QObject::connect(actionGroup, &QActionGroup::triggered, this, &MainWindow::manageMode);
     QObject::connect(ui->actionSelection, &QAction::triggered, graphicsScene, &GraphicsScene::setSelectionMode);
             // @see http://stackoverflow.com/questions/27188538/how-to-delete-qgraphicsitem-properly
 }
@@ -66,26 +73,57 @@ void MainWindow::addPoint(const QPointF &pos) {
     Point* p = new Point(pos.x(), pos.y());
     this->data.getTriangulation(this->currentTriang)->addPoint(p);
     ui->tabPoints->model()->layoutChanged();
-    graphicsScene->addPoint(p, Qt::blue);
+    graphicsScene->addPoint(p, currentTriang);
 }
 
 void MainWindow::redraw(const Point& p1, const Point& p2) {
     QPointF b1(std::min(p1.getX(), p2.getX()) - PointItem::rad, std::min(p1.getY(), p2.getY()) - PointItem::rad),
             b2(std::max(p1.getX(), p2.getX()) + PointItem::rad, std::max(p1.getY(), p2.getY()) + PointItem::rad);
     graphicsScene->update(QRectF(b1, b2));
-    //graphicsView->zoom(2.0);
-    //graphicsView->zoom(0.5);
 }
 
-void MainWindow::changeColor() {
-    qDebug() << Q_FUNC_INFO << "Graaaaaah";
-    QColor color = QColorDialog::getColor();
-    if(!color.isValid()) return;
-//    QPalette p = ui->colorButton->palette();
-//    p.setColor(QPalette::Button, color);
-//    ui->colorButton->setAutoFillBackground(true);
-//    ui->colorButton->setPalette(p);
-//    ui->colorButton->update();
-    QString qss = QString("background-color: %1").arg(color.name());
+void MainWindow::chooseColor() {
+    changeColor(QColorDialog::getColor());
+}
+
+void MainWindow::changeColor(const QColor &col) {
+    if(!col.isValid()) return;
+    QString qss = QString("background-color: %1").arg(col.name());
     ui->colorButton->setStyleSheet(qss);
+    graphicsScene->setColor(currentTriang, col);
+}
+
+void MainWindow::manageMode() {
+    graphicsView->setDragMode(QGraphicsView::NoDrag);
+    if(actionGroup->checkedAction() == ui->actionSelection) {
+        graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
+        graphicsScene->setMode(GraphicsScene::SELECTION);
+    } else if(actionGroup->checkedAction() == ui->actionPoint) {
+        graphicsScene->setMode(GraphicsScene::POINT);
+    } else if(actionGroup->checkedAction() == ui->actionSegment) {
+        graphicsScene->setMode(GraphicsScene::SEGMENT);
+    } else if(actionGroup->checkedAction() == ui->actionSuppression) {
+        graphicsScene->setMode(GraphicsScene::SUPPRESSION);
+    }
+}
+
+void MainWindow::manageVisibility() {
+    graphicsScene->setVisibility(currentTriang, ui->isVisible->isChecked());
+    // Hack pour faire redessiner la scene
+    graphicsView->zoom(2.0);
+    graphicsView->zoom(0.5);
+}
+
+void MainWindow::save() {
+    qDebug() << Q_FUNC_INFO << "Saving ...";
+    QSettings settings("MyCompany", "MyApp");
+    settings.setValue("geometry", saveGeometry());
+    settings.setValue("windowState", saveState());
+}
+
+void MainWindow::readSettings() {
+    qDebug() << Q_FUNC_INFO << "Restoring ...";
+    QSettings settings("MyCompany", "MyApp");
+    restoreGeometry(settings.value("MainWindow/geometry").toByteArray());
+    restoreState(settings.value("MainWindow/windowState").toByteArray());
 }

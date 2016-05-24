@@ -1,27 +1,46 @@
 #include "graphicsscene.h"
 
 #include <QDebug>
+#include "triangulation.h"
 
 GraphicsScene::GraphicsScene(Data *data, QObject *parent) :
     QGraphicsScene(parent),
     data(data),
     mode(POINT),
-    colorOfTriangulation(1, Qt::green)
+    colorOfTriangulation(1, Qt::green),
+    visibilityOfTriangulation(1, true),
+    lastMousePos()
 {
     setSceneRect(-3000, -3000, 6000, 6000);
 
     paint();
 }
 
-void GraphicsScene::addPoint(Point* p, const QColor &color) {
-    qDebug() << Q_FUNC_INFO << p << " " << color;
+void GraphicsScene::addPoint(Point* p, int indexOfTriangulation) {
+    qDebug() << Q_FUNC_INFO << p << " " << colorOfTriangulation.at(indexOfTriangulation);
 
-    addItem(new PointItem(p));
+    addItem(new PointItem(p, &(colorOfTriangulation[indexOfTriangulation]), &(visibilityOfTriangulation[indexOfTriangulation])));
+}
+
+void GraphicsScene::setMode(GraphicsScene::MODE mode) {
+    this->mode = mode;
 }
 
 void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     emit mouseMoved(event->scenePos());
 }
+
+/*void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
+    switch(event->button()) {
+    case Qt::RightButton:
+        clickOnSelection(event->scenePos());
+        break;
+    case Qt::MiddleButton:
+        //translate
+        break;
+    default:
+    }
+}*/
 
 void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     switch(event->button()) {
@@ -44,6 +63,8 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     case Qt::MiddleButton:
         //translate
         break;
+    default:
+        break;
     }
 
 }
@@ -53,12 +74,10 @@ void GraphicsScene::clickOnSelection(const QPointF &pos) {
 }
 
 void GraphicsScene::paint() {
-    qDebug() << Q_FUNC_INFO;
-    QPainter painter();
-
-    for(auto tri : data->getTriangulations()) {
+    Triangulation* tri;
+    for(unsigned int i{} ; i < data->getTriangulations().size() && (tri = data->getTriangulation(i)) ; ++i) {
         for(auto p : tri->getPoints()) {
-            addItem(new PointItem(p));
+            addPoint(p, i);
             qDebug() << p;
         }
     }
@@ -72,4 +91,8 @@ void GraphicsScene::setSelectionMode() {
 void GraphicsScene::setColor(int indexTriangulation, const QColor &color) {
     colorOfTriangulation[indexTriangulation] = color;
 
+}
+
+void GraphicsScene::setVisibility(int indexTriangulation, bool visibility) {
+    visibilityOfTriangulation[indexTriangulation] = visibility;
 }

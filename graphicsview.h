@@ -14,9 +14,9 @@ public:
 protected:
     virtual void wheelEvent(QWheelEvent* event) Q_DECL_OVERRIDE;
 
-
     bool wheel;
     double scaleFactor;
+    QPointF lastMousePos;
 
 signals:
 
@@ -26,6 +26,7 @@ public slots:
     void zoomOut();
     void center();
     void likeANewBorn();
+    void drag(const QPointF& delta);
 
 };
 

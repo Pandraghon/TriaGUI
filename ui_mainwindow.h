@@ -76,6 +76,7 @@ public:
     QVBoxLayout *verticalLayout_2;
     QCheckBox *isVisible;
     QPushButton *colorButton;
+    QCheckBox *checkBox;
     QMenuBar *menuBar;
     QMenu *menuFichier;
     QMenu *menuDessin;
@@ -315,6 +316,9 @@ public:
 
         verticalLayout_2->addWidget(colorButton);
 
+        checkBox = new QCheckBox(frame_2);
+        checkBox->setObjectName(QStringLiteral("checkBox"));
+        checkBox->setGeometry(QRect(30, 10, 81, 20));
 
         horizontalLayout->addWidget(frame_2);
 
@@ -417,6 +421,7 @@ public:
         groupBox->setTitle(QApplication::translate("MainWindow", "Triangulation courante :", 0));
         isVisible->setText(QApplication::translate("MainWindow", "Visible", 0));
         colorButton->setText(QString());
+        checkBox->setText(QApplication::translate("MainWindow", "Aide", 0));
         menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", 0));
         menuDessin->setTitle(QApplication::translate("MainWindow", "Dessin", 0));
         menuMode->setTitle(QApplication::translate("MainWindow", "Mode", 0));

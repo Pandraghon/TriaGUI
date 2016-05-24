@@ -5,7 +5,8 @@
 GraphicsView::GraphicsView(QWidget *parent) :
     QGraphicsView(parent),
     wheel(false),
-    scaleFactor(4.0)
+    scaleFactor(4.0),
+    lastMousePos()
 {
     setMouseTracking(true);
     scale(scaleFactor, - scaleFactor);
@@ -13,6 +14,7 @@ GraphicsView::GraphicsView(QWidget *parent) :
     setMinimumSize(300, 300);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setDragMode(DragMode::NoDrag);
 }
 
 void GraphicsView::wheelEvent(QWheelEvent *event) {
@@ -63,4 +65,9 @@ void GraphicsView::center() {
 void GraphicsView::likeANewBorn() {
     center();
     zoom(4 / scaleFactor);
+}
+
+void GraphicsView::drag(const QPointF &delta) {
+    qDebug() << Q_FUNC_INFO << tr("TRANSLATE");
+    translate(delta.x(), delta.y());
 }

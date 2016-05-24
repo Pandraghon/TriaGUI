@@ -3,10 +3,11 @@
 #include <QDebug>
 #include <QBrush>
 
-PointItem::PointItem(Point* point, const QColor &color, QGraphicsItem *parent) :
+PointItem::PointItem(Point* point, QColor *color, bool *visibility, QGraphicsItem *parent) :
     QGraphicsItem(parent),
     point(point),
-    color(color)
+    color(color),
+    visibility(visibility)
 {
     setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable);
     //setFlags(QGraphicsItem::ItemIgnoresTransformations);
@@ -17,7 +18,8 @@ QRectF PointItem::boundingRect() const {
 }
 
 void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/, QWidget * /*widget*/) {
-    painter->setBrush(QBrush(color));
+    if(!*visibility) return;
+    painter->setBrush(QBrush(*color));
     // @see http://stackoverflow.com/a/24874013
     QTransform t = painter->transform();
     qreal m11 = t.m11(), m22 = t.m22();

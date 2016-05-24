@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QActionGroup>
 
 #include "data.h"
 #include "pointstablemodel.h"
@@ -32,13 +33,18 @@ private:
     SegmentsTableModel* segmentsTableModel;
     GraphicsScene* graphicsScene;
     GraphicsView* graphicsView;
+    QActionGroup* actionGroup;
 
 private slots:
     void setMousePosText(const QPointF &pos);
     void addPoint(const QPointF &pos);
     void redraw(const Point &p1, const Point &p2);
-    void changeColor();
-
+    void chooseColor();
+    void changeColor(const QColor& col);
+    void manageMode();
+    void manageVisibility();
+    void save();
+    void readSettings();
 };
 
 #endif // MAINWINDOW_H
