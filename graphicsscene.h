@@ -24,6 +24,7 @@ private:
     MODE mode;
     QVector<QColor> colorOfTriangulation;
     QVector<bool> visibilityOfTriangulation;
+    QVector<PointItem*> pointsSelected;
     QPointF lastMousePos;
 
     void clickOnSelection(const QPointF& pos);

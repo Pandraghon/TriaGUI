@@ -9,6 +9,7 @@ GraphicsScene::GraphicsScene(Data *data, QObject *parent) :
     mode(POINT),
     colorOfTriangulation(1, Qt::green),
     visibilityOfTriangulation(1, true),
+    pointsSelected(0),
     lastMousePos()
 {
     setSceneRect(-3000, -3000, 6000, 6000);
@@ -19,7 +20,12 @@ GraphicsScene::GraphicsScene(Data *data, QObject *parent) :
 void GraphicsScene::addPoint(Point* p, int indexOfTriangulation) {
     qDebug() << Q_FUNC_INFO << p << " " << colorOfTriangulation.at(indexOfTriangulation);
 
-    addItem(new PointItem(p, &(colorOfTriangulation[indexOfTriangulation]), &(visibilityOfTriangulation[indexOfTriangulation])));
+    PointItem* pi{new PointItem(p, &(colorOfTriangulation[indexOfTriangulation]), &(visibilityOfTriangulation[indexOfTriangulation]))};
+    addItem(pi);
+    for(auto i : pointsSelected) i->select(false);
+    pointsSelected.clear();
+    pi->select();
+    pointsSelected.push_back(pi);
 }
 
 void GraphicsScene::setMode(GraphicsScene::MODE mode) {

@@ -115,7 +115,7 @@ void MainWindow::manageVisibility() {
 }
 
 void MainWindow::save() {
-    qDebug() << Q_FUNC_INFO << "Saving ...";
+    qDebug() << "Saving ...";
     QSettings settings("MyCompany", "MyApp");
     settings.setValue("geometry", saveGeometry());
     settings.setValue("windowState", saveState());
