@@ -18,6 +18,7 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     pointstablemodel.cpp \
     triangulation.cpp \
+    triangle.cpp \
     point.cpp \
     data.cpp \
     segment.cpp \
@@ -30,6 +31,7 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     pointstablemodel.h \
     triangulation.h \
+    triangle.h \
     point.h \
     data.h \
     segment.h \
