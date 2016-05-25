@@ -38,6 +38,7 @@ private:
 private slots:
     void setMousePosText(const QPointF &pos);
     void addPoint(const QPointF &pos);
+    void addSegment(const QList<QGraphicsItem *> &list);
     void redraw(const Point &p1, const Point &p2);
     void chooseColor();
     void changeColor(const QColor& col);

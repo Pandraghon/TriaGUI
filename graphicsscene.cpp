@@ -10,7 +10,9 @@ GraphicsScene::GraphicsScene(Data *data, QObject *parent) :
     colorOfTriangulation(1, Qt::green),
     visibilityOfTriangulation(1, true),
     pointsSelected(0),
-    lastMousePos()
+    lastMousePos()/*,
+    ps1(nullptr),
+    ps2(nullptr)*/
 {
     setSceneRect(-3000, -3000, 6000, 6000);
 
@@ -22,10 +24,16 @@ void GraphicsScene::addPoint(Point* p, int indexOfTriangulation) {
 
     PointItem* pi{new PointItem(p, &(colorOfTriangulation[indexOfTriangulation]), &(visibilityOfTriangulation[indexOfTriangulation]))};
     addItem(pi);
-    for(auto i : pointsSelected) i->select(false);
-    pointsSelected.clear();
+    for(auto i : selectedItems()) ((PointItem*)i)->select(false);
+    //for(auto i : pointsSelected) i->select(false);
+    //pointsSelected.clear();
     pi->select();
-    pointsSelected.push_back(pi);
+    //pointsSelected.push_back(pi);
+}
+
+void GraphicsScene::addSegment(Segment *s, int indexOfTriangulation) {
+    SegmentItem* si{new SegmentItem(s, &(colorOfTriangulation[indexOfTriangulation]), &(visibilityOfTriangulation[indexOfTriangulation]))};
+    addItem(si);
 }
 
 void GraphicsScene::setMode(GraphicsScene::MODE mode) {
@@ -34,6 +42,7 @@ void GraphicsScene::setMode(GraphicsScene::MODE mode) {
 
 void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     emit mouseMoved(event->scenePos());
+    //QGraphicsScene::mouseMoveEvent(event);
 }
 
 /*void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
@@ -56,7 +65,12 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
                 emit pointClicked(event->scenePos());
                 break;
             case SEGMENT:
-                emit segmentClicked(event->scenePos());
+                QGraphicsScene::mouseReleaseEvent(event);
+                //TODO
+                if(selectedItems().size() == 2) {
+                    emit segmentClicked(selectedItems());
+                    for(auto i : selectedItems()) ((PointItem*)i)->select(false);
+                }
                 break;
             case SUPPRESSION:
 
@@ -65,6 +79,7 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
         break;
     case Qt::RightButton:
         clickOnSelection(event->scenePos());
+        QGraphicsScene::mouseReleaseEvent(event);
         break;
     case Qt::MiddleButton:
         //translate
@@ -72,11 +87,10 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     default:
         break;
     }
-
 }
 
 void GraphicsScene::clickOnSelection(const QPointF &pos) {
-
+    qDebug() << selectedItems();
 }
 
 void GraphicsScene::paint() {
@@ -92,6 +106,10 @@ void GraphicsScene::paint() {
 
 void GraphicsScene::setSelectionMode() {
     mode = SELECTION;
+}
+
+void GraphicsScene::managePointClick(PointItem *p) {
+
 }
 
 void GraphicsScene::setColor(int indexTriangulation, const QColor &color) {

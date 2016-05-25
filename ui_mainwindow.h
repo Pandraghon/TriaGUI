@@ -71,12 +71,15 @@ public:
     QLabel *textSelectedPointName;
     QLabel *textSelectedPointPosition;
     QFrame *frame_2;
+    QVBoxLayout *verticalLayout_7;
+    QVBoxLayout *verticalLayout_6;
+    QCheckBox *checkBox;
+    QSpacerItem *verticalSpacer;
     QGroupBox *groupBox;
-    QWidget *widget;
+    QVBoxLayout *verticalLayout_5;
     QVBoxLayout *verticalLayout_2;
     QCheckBox *isVisible;
     QPushButton *colorButton;
-    QCheckBox *checkBox;
     QMenuBar *menuBar;
     QMenu *menuFichier;
     QMenu *menuDessin;
@@ -290,24 +293,38 @@ public:
         frame_2->setMaximumSize(QSize(300, 16777215));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
+        verticalLayout_7 = new QVBoxLayout(frame_2);
+        verticalLayout_7->setSpacing(6);
+        verticalLayout_7->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        checkBox = new QCheckBox(frame_2);
+        checkBox->setObjectName(QStringLiteral("checkBox"));
+
+        verticalLayout_6->addWidget(checkBox);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_6->addItem(verticalSpacer);
+
         groupBox = new QGroupBox(frame_2);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(30, 240, 146, 118));
-        widget = new QWidget(groupBox);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(40, 30, 66, 58));
-        verticalLayout_2 = new QVBoxLayout(widget);
+        verticalLayout_5 = new QVBoxLayout(groupBox);
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        isVisible = new QCheckBox(widget);
+        isVisible = new QCheckBox(groupBox);
         isVisible->setObjectName(QStringLiteral("isVisible"));
         isVisible->setChecked(true);
 
         verticalLayout_2->addWidget(isVisible);
 
-        colorButton = new QPushButton(widget);
+        colorButton = new QPushButton(groupBox);
         colorButton->setObjectName(QStringLiteral("colorButton"));
         colorButton->setAutoFillBackground(true);
         QIcon icon13;
@@ -316,9 +333,15 @@ public:
 
         verticalLayout_2->addWidget(colorButton);
 
-        checkBox = new QCheckBox(frame_2);
-        checkBox->setObjectName(QStringLiteral("checkBox"));
-        checkBox->setGeometry(QRect(30, 10, 81, 20));
+
+        verticalLayout_5->addLayout(verticalLayout_2);
+
+
+        verticalLayout_6->addWidget(groupBox);
+
+
+        verticalLayout_7->addLayout(verticalLayout_6);
+
 
         horizontalLayout->addWidget(frame_2);
 
@@ -418,10 +441,10 @@ public:
         textMousePosition->setText(QApplication::translate("MainWindow", "(x;y)", 0));
         textSelectedPointName->setText(QApplication::translate("MainWindow", "P1", 0));
         textSelectedPointPosition->setText(QApplication::translate("MainWindow", "(x;y)", 0));
+        checkBox->setText(QApplication::translate("MainWindow", "Aide", 0));
         groupBox->setTitle(QApplication::translate("MainWindow", "Triangulation courante :", 0));
         isVisible->setText(QApplication::translate("MainWindow", "Visible", 0));
         colorButton->setText(QString());
-        checkBox->setText(QApplication::translate("MainWindow", "Aide", 0));
         menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", 0));
         menuDessin->setTitle(QApplication::translate("MainWindow", "Dessin", 0));
         menuMode->setTitle(QApplication::translate("MainWindow", "Mode", 0));

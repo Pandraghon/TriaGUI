@@ -6,6 +6,8 @@
 #include <QPainter>
 
 #include "data.h"
+#include "segmentitem.h"
+#include "segment.h"
 #include "pointitem.h"
 #include "point.h"
 
@@ -17,6 +19,7 @@ public:
 
     explicit GraphicsScene(Data *data, QObject *parent = 0);
     void addPoint(Point *p, int indexOfTriangulation);
+    void addSegment(Segment *s, int indexOfTriangulation);
     void setMode(MODE mode);
 
 private:
@@ -26,6 +29,8 @@ private:
     QVector<bool> visibilityOfTriangulation;
     QVector<PointItem*> pointsSelected;
     QPointF lastMousePos;
+    //PointItem* ps1; //points of segment
+    //PointItem* ps2;
 
     void clickOnSelection(const QPointF& pos);
 
@@ -38,12 +43,13 @@ protected:
 signals:
     void mouseMoved(const QPointF& pos);
     void pointClicked(const QPointF& pos);
-    void segmentClicked(const QPointF& pos);
+    void segmentClicked(const QList<QGraphicsItem*>& list);
     void viewDragged(const QPointF& delta);
 
 
 public slots:
     void setSelectionMode();
+    void managePointClick(PointItem* p);
 
     void setColor(int indexTriangulation, const QColor& color);
     void setVisibility(int indexTriangulation, bool visibility);

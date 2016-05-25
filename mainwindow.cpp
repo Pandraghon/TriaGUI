@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect(graphicsScene, &GraphicsScene::mouseMoved, this, &MainWindow::setMousePosText);
     QObject::connect(graphicsScene, &GraphicsScene::pointClicked, this, &MainWindow::addPoint);
+    QObject::connect(graphicsScene, &GraphicsScene::segmentClicked, this, &MainWindow::addSegment);
     QObject::connect(graphicsScene, &GraphicsScene::viewDragged, graphicsView, &GraphicsView::drag);
 
     QObject::connect(pointsTableModel, &PointsTableModel::valuesChanged, this, &MainWindow::redraw);
@@ -74,6 +75,13 @@ void MainWindow::addPoint(const QPointF &pos) {
     this->data.getTriangulation(this->currentTriang)->addPoint(p);
     ui->tabPoints->model()->layoutChanged();
     graphicsScene->addPoint(p, currentTriang);
+}
+
+void MainWindow::addSegment(const QList<QGraphicsItem *> &list) {
+    Segment* s = new Segment(((PointItem*)list.at(0))->getPoint(), ((PointItem*)list.at(1))->getPoint());
+    this->data.getTriangulation(this->currentTriang)->addSegment(s);
+    ui->tabSegments->model()->layoutChanged();
+    graphicsScene->addSegment(s, currentTriang);
 }
 
 void MainWindow::redraw(const Point& p1, const Point& p2) {
