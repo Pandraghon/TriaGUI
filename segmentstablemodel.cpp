@@ -24,9 +24,9 @@ QVariant SegmentsTableModel::data(const QModelIndex &index, int role) const {
             if(row < m_triang->getSegments().size()) {
                 switch(col) {
                     case 0:
-                        break;//return m_triang->getPoints()[row]->getX();
+                        return QString::fromStdString(m_triang->getSegment(row)->getP0()->getNom());
                     case 1:
-                        break;//return m_triang->getPoints()[row]->getY();
+                        return QString::fromStdString(m_triang->getSegment(row)->getP1()->getNom());
                 }
             }
             break;

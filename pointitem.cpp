@@ -20,11 +20,11 @@ QRectF PointItem::boundingRect() const {
 
 void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/, QWidget * /*widget*/) {
     if(!*visibility) return;
-    painter->setBrush(QBrush(*color));
     // @see http://stackoverflow.com/a/24874013
     QTransform t = painter->transform();
     qreal m11 = t.m11(), m22 = t.m22();
     painter->save();
+    painter->setBrush(QBrush(*color));
     painter->setTransform(QTransform(1, t.m12(), t.m13(),
                                          t.m21(), 1, t.m23(), t.m31(),
                                          t.m32(), t.m33()));
@@ -40,7 +40,7 @@ void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*opti
 void PointItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     //emit clicked(this);
     select(!isSelected());
-    QGraphicsItem::mouseReleaseEvent(event);
+    //QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void PointItem::select(bool isSelected) {

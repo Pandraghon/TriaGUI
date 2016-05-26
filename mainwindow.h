@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QActionGroup>
+#include <QVariant> // serialization
 
 #include "data.h"
 #include "pointstablemodel.h"
@@ -35,6 +36,9 @@ private:
     GraphicsView* graphicsView;
     QActionGroup* actionGroup;
 
+    friend QDataStream& operator<<(QDataStream&, const MainWindow&);
+    friend QDataStream& operator>>(QDataStream&, MainWindow&);
+
 private slots:
     void setMousePosText(const QPointF &pos);
     void addPoint(const QPointF &pos);
@@ -47,5 +51,9 @@ private slots:
     void save();
     void readSettings();
 };
+
+Q_DECLARE_METATYPE(MainWindow)
+QDataStream& operator<<(QDataStream& out, const MainWindow& v);
+QDataStream& operator>>(QDataStream& in, MainWindow& v);
 
 #endif // MAINWINDOW_H

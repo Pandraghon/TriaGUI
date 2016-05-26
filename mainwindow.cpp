@@ -124,9 +124,12 @@ void MainWindow::manageVisibility() {
 
 void MainWindow::save() {
     qDebug() << "Saving ...";
-    QSettings settings("MyCompany", "MyApp");
-    settings.setValue("geometry", saveGeometry());
-    settings.setValue("windowState", saveState());
+    QSettings settings("save.ini", QSettings::IniFormat);
+    //settings.setValue("MainWindow", QVariant::fromValue(this));
+    settings.sync();
+    /*settings.setValue("geometry", saveGeometry());
+    settings.setValue("windowState", saveState());*/
+
 }
 
 void MainWindow::readSettings() {
@@ -134,4 +137,17 @@ void MainWindow::readSettings() {
     QSettings settings("MyCompany", "MyApp");
     restoreGeometry(settings.value("MainWindow/geometry").toByteArray());
     restoreState(settings.value("MainWindow/windowState").toByteArray());
+}
+
+
+QDataStream &operator<<(QDataStream &out, const MainWindow &v) {
+    out << v.data;
+    return out;
+}
+
+
+
+QDataStream &operator>>(QDataStream &in, MainWindow &v) {
+    in >> v.data;
+    return in;
 }

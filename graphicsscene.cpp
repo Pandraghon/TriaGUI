@@ -62,16 +62,21 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     case Qt::LeftButton:
         switch(this->mode) {
             case POINT:
+                //http://forum.qtfr.org/discussion/13407/selection-multiple-avancee-dans-une-qgraphicsscene
                 emit pointClicked(event->scenePos());
                 break;
-            case SEGMENT:
+            case SEGMENT: {
                 QGraphicsScene::mouseReleaseEvent(event);
+                QList<QGraphicsItem*> l = selectedItems();
+                //if(itemAt(event->scenePos(), QTransform()) == NULL) break;
                 //TODO
-                if(selectedItems().size() == 2) {
-                    emit segmentClicked(selectedItems());
-                    for(auto i : selectedItems()) ((PointItem*)i)->select(false);
+                if(l.size() >= 2) {
+                    emit segmentClicked(l);
+                    for(auto i : l)
+                        ((PointItem*)i)->select(false);
+                    ((PointItem*)itemAt(event->scenePos(), QTransform()))->select(true);
                 }
-                break;
+                } break;
             case SUPPRESSION:
 
                 break;

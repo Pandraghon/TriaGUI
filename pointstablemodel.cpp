@@ -60,7 +60,7 @@ QVariant PointsTableModel::headerData(int section, Qt::Orientation orientation, 
         if(orientation == Qt::Horizontal) {
             return m_headers[section];
         } else {
-            return QString("P%1").arg(section + 1);
+            return section == m_triang->getPoints().size() ? tr("*") : QString::fromStdString(m_triang->getPoint(section)->getNom());
         }
     }
 
