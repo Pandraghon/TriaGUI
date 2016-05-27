@@ -36,8 +36,8 @@ private:
     GraphicsView* graphicsView;
     QActionGroup* actionGroup;
 
-    friend QDataStream& operator<<(QDataStream&, const MainWindow&);
-    friend QDataStream& operator>>(QDataStream&, MainWindow&);
+//    friend QDataStream& operator<<(QDataStream&, const MainWindow&);
+//    friend QDataStream& operator>>(QDataStream&, MainWindow&);
 
 private slots:
     void setMousePosText(const QPointF &pos);
@@ -52,8 +52,8 @@ private slots:
     void readSettings();
 };
 
-Q_DECLARE_METATYPE(MainWindow)
-QDataStream& operator<<(QDataStream& out, const MainWindow& v);
-QDataStream& operator>>(QDataStream& in, MainWindow& v);
+//Q_DECLARE_METATYPE(MainWindow)
+//QDataStream& operator<<(QDataStream& out, const MainWindow& v);
+//QDataStream& operator>>(QDataStream& in, MainWindow& v);
 
 #endif // MAINWINDOW_H

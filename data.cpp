@@ -25,3 +25,29 @@ std::vector<Triangulation*> Data::getTriangulations() const {
 Triangulation *Data::getTriangulation(int index) const {
     return m_triangs.at(index);
 }
+
+
+std::ostream &operator<<(std::ostream &out, const Data &v) {
+    out << v.m_triangs.size() << std::endl;
+    for(Triangulation* t : v.m_triangs) {
+        out << *t << std::endl;
+    }
+//    out << v.m_triangs.size();
+//    for(Triangle* t : v.m_triangs)
+//        out << t->getNom()
+//            << t->
+    return out;
+}
+
+
+std::istream &operator>>(std::istream &in, Data &v) {
+    int pointsSize{};
+    Point p;
+    in >> pointsSize;
+    v.m_points.resize(pointsSize);
+    for(int i{} ; i < pointsSize ; ++i) {
+        in >> p;
+        v.m_points[i] = new Point(p.getX(), p.getY());
+    }
+    return in;
+}

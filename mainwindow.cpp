@@ -2,8 +2,11 @@
 #include "ui_mainwindow.h"
 
 #include <QColorDialog>
+#include <QFileDialog>
 #include <QDebug>
 #include <QSettings>
+
+#include <fstream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -123,9 +126,12 @@ void MainWindow::manageVisibility() {
 }
 
 void MainWindow::save() {
-    qDebug() << "Saving ...";
-    QSettings settings("save.ini", QSettings::IniFormat);
-    //settings.setValue("MainWindow", QVariant::fromValue(this));
+    QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder"), "files/", tr("Save Files (*.save)"));
+    std::ofstream fout{filename.toStdString()};
+    qDebug() << "Saving in " << filename << " " << fout;
+    fout << data;
+    /*QSettings settings("save.ini", QSettings::IniFormat);
+    settings.setValue("MainWindow", QVariant::fromValue(data));
     settings.sync();
     /*settings.setValue("geometry", saveGeometry());
     settings.setValue("windowState", saveState());*/
@@ -137,17 +143,4 @@ void MainWindow::readSettings() {
     QSettings settings("MyCompany", "MyApp");
     restoreGeometry(settings.value("MainWindow/geometry").toByteArray());
     restoreState(settings.value("MainWindow/windowState").toByteArray());
-}
-
-
-QDataStream &operator<<(QDataStream &out, const MainWindow &v) {
-    out << v.data;
-    return out;
-}
-
-
-
-QDataStream &operator>>(QDataStream &in, MainWindow &v) {
-    in >> v.data;
-    return in;
 }

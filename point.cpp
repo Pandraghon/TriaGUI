@@ -100,3 +100,16 @@ void Point::print() const {
 
 }
 
+std::ostream& operator<<(std::ostream& out, const Point& p) {
+    out << p.m_nom << " "
+        << p.m_x << " "
+        << p.m_y;
+    return out;
+}
+
+std::istream& operator>>(std::istream& in, Point& p) {
+    in >> p.m_nom
+       >> p.m_x
+       >> p.m_y;
+    return in;
+}

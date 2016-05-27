@@ -23,10 +23,16 @@ public:
     void print() const;
     void scanTriangles();
 
+    friend std::ostream& operator<<(std::ostream&, const Triangulation&);
+    friend std::istream& operator>>(std::istream&, Triangulation&);
+
 private:
     std::vector<Point*> m_points;
     std::vector<Segment*> m_segments;
     std::vector<Triangle*> m_triangles;
 };
+
+std::ostream& operator<<(std::ostream& out, const Triangulation& t);
+std::istream& operator>>(std::istream& in, Triangulation& t);
 
 #endif // TRIANGULATION_H

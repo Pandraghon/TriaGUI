@@ -99,3 +99,14 @@ void Triangulation::scanTriangles()
         }
     }
 }
+
+std::ostream& operator<<(std::ostream& out, const Triangulation& t) {
+    out << t.m_points.size() << std::endl;
+    for(Point* p : t.m_points)
+        out << *p << std::endl;
+    return out;
+}
+
+std::istream& operator>>(std::istream& in, Triangulation& t) {
+    return in;
+}

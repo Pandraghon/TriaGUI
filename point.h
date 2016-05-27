@@ -24,6 +24,9 @@ public:
     bool isLeft(const Segment* pq) const;
     void print() const;
 
+    friend std::ostream& operator<<(std::ostream&, const Point&);
+    friend std::istream& operator>>(std::istream&, Point&);
+
 private:
     float m_x, m_y;
     //std::vector<Point*> m_neighbors;
@@ -31,5 +34,8 @@ private:
     std::string m_nom;
     static int nb;
 };
+
+std::ostream& operator<<(std::ostream& out, const Point& p);
+std::istream& operator>>(std::istream& in, Point& p);
 
 #endif // POINT_H
