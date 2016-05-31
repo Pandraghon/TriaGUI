@@ -488,7 +488,7 @@
      <normaloff>:/images/Desktop/_PNG 64_/basic_target.png</normaloff>:/images/Desktop/_PNG 64_/basic_target.png</iconset>
    </property>
    <property name="text">
-    <string>Réinitialiser</string>
+    <string>Réinitialiser la vue</string>
    </property>
   </action>
  </widget>

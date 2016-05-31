@@ -18,7 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     segmentsTableModel(new SegmentsTableModel(data.getTriangulation(currentTriang))),
     graphicsScene(new GraphicsScene(&data)),
     graphicsView(new GraphicsView()),
-    actionGroup(new QActionGroup(this))
+    actionGroup(new QActionGroup(this)),
+    currentSaveFile(""),
+    modified()
 {
     ui->setupUi(this);
 
@@ -39,7 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
     actionGroup->addAction(ui->actionSuppression);
     ui->mainToolBar->addActions(actionGroup->actions());
 
+    setTitle();
     changeColor(Qt::green);
+    setModified(false);
 
     QObject::connect(graphicsScene, &GraphicsScene::mouseMoved, this, &MainWindow::setMousePosText);
     QObject::connect(graphicsScene, &GraphicsScene::pointClicked, this, &MainWindow::addPoint);
@@ -54,7 +58,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Toolbar
     QObject::connect(ui->actionEnregistrer, &QAction::triggered, this, &MainWindow::save);
-    QObject::connect(ui->actionOuvrir, &QAction::triggered, this, &MainWindow::readSettings);
+    QObject::connect(ui->actionEnregistrer_sous, &QAction::triggered, this, &MainWindow::saveAs);
+    QObject::connect(ui->actionOuvrir, &QAction::triggered, this, &MainWindow::load);
     QObject::connect(ui->actionZoom, &QAction::triggered, graphicsView, &GraphicsView::zoomIn);
     QObject::connect(ui->actionZoom_2, &QAction::triggered, graphicsView, &GraphicsView::zoomOut);
     QObject::connect(ui->actionRecentrer, &QAction::triggered, graphicsView, &GraphicsView::center);
@@ -68,8 +73,49 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event) {
+    if(!modified) {
+        return QMainWindow::closeEvent(event);
+    }
+    int ret{saveQuestion()};
+
+    switch(ret) {
+    case QMessageBox::Save:
+        save();
+    case QMessageBox::Discard:
+        event->accept();
+        break;
+    case QMessageBox::Cancel:
+        event->ignore();
+        break;
+    }
+}
+
+QMessageBox::StandardButton MainWindow::saveQuestion() const {
+    QMessageBox b;
+    b.setIcon(QMessageBox::Warning);
+    b.setText(tr("Les données ont été modifiées."));
+    b.setInformativeText(tr("Voulez-vous enregistrer les modifications ?"));
+    b.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+    b.setDefaultButton(QMessageBox::Save);
+    return static_cast<QMessageBox::StandardButton>(b.exec());
+}
+
+void MainWindow::setModified(bool isModified) {
+    modified = isModified;
+    ui->actionEnregistrer->setEnabled(isModified);
+    setTitle();
+}
+
+void MainWindow::setTitle() {
+    QString t = QString("%1 - %2")
+                .arg(TITLE).arg(currentSaveFile.isEmpty() ? "new" : currentSaveFile);
+    if(modified) t.append("*");
+    QMainWindow::setWindowTitle(t);
+}
+
 void MainWindow::setMousePosText(const QPointF& pos) {
-    ui->textMousePosition->setText(tr("(") + QString::number(pos.x()) + tr(";") + QString::number(pos.y()) + tr(")"));
+    ui->textMousePosition->setText(QString("(%1;%2)").arg(QString::number(pos.x())).arg(QString::number(pos.y())));
 }
 
 
@@ -78,6 +124,7 @@ void MainWindow::addPoint(const QPointF &pos) {
     this->data.getTriangulation(this->currentTriang)->addPoint(p);
     ui->tabPoints->model()->layoutChanged();
     graphicsScene->addPoint(p, currentTriang);
+    setModified();
 }
 
 void MainWindow::addSegment(const QList<QGraphicsItem *> &list) {
@@ -85,6 +132,7 @@ void MainWindow::addSegment(const QList<QGraphicsItem *> &list) {
     this->data.getTriangulation(this->currentTriang)->addSegment(s);
     ui->tabSegments->model()->layoutChanged();
     graphicsScene->addSegment(s, currentTriang);
+    setModified();
 }
 
 void MainWindow::redraw(const Point& p1, const Point& p2) {
@@ -102,6 +150,7 @@ void MainWindow::changeColor(const QColor &col) {
     QString qss = QString("background-color: %1").arg(col.name());
     ui->colorButton->setStyleSheet(qss);
     graphicsScene->setColor(currentTriang, col);
+    setModified();
 }
 
 void MainWindow::manageMode() {
@@ -123,24 +172,47 @@ void MainWindow::manageVisibility() {
     // Hack pour faire redessiner la scene
     graphicsView->zoom(2.0);
     graphicsView->zoom(0.5);
+    setModified();
 }
 
-void MainWindow::save() {
+void MainWindow::save(bool forced) {
+    if(!modified && !forced) return;
+
     QString filename = QFileDialog::getSaveFileName(this, tr("Sauvegarder"), "files/", tr("Save Files (*.save)"));
-    std::ofstream fout{filename.toStdString()};
-    qDebug() << "Saving in " << filename << " " << fout;
-    fout << data;
-    /*QSettings settings("save.ini", QSettings::IniFormat);
-    settings.setValue("MainWindow", QVariant::fromValue(data));
-    settings.sync();
-    /*settings.setValue("geometry", saveGeometry());
-    settings.setValue("windowState", saveState());*/
+    if(filename.isNull()) return;
 
+    qDebug() << "Saving in " << filename;
+    std::ofstream fout{filename.toStdString()};
+    fout << data;
+
+    currentSaveFile = filename;
+    setModified(false);
 }
 
-void MainWindow::readSettings() {
-    qDebug() << Q_FUNC_INFO << "Restoring ...";
-    QSettings settings("MyCompany", "MyApp");
-    restoreGeometry(settings.value("MainWindow/geometry").toByteArray());
-    restoreState(settings.value("MainWindow/windowState").toByteArray());
+void MainWindow::saveAs() {
+    save(true);
+}
+
+void MainWindow::load() {
+    if(modified) {
+        int ret{saveQuestion()};
+        switch(ret) {
+        case QMessageBox::Save:
+            save();
+        case QMessageBox::Discard:
+            break;
+        case QMessageBox::Cancel:
+            return;
+        }
+    }
+
+    QString filename = QFileDialog::getSaveFileName(this, tr("Ouvrir"), "files/", tr("Save Files (*.save)"));
+    if(filename.isNull()) return;
+
+    qDebug() << "Restoring from " << filename;
+    std::ifstream fin{filename.toStdString()};
+    fin >> data;
+
+    currentSaveFile = filename;
+    setModified(false);
 }
