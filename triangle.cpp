@@ -176,3 +176,13 @@ void Triangle::print() const {
         std::cout<<std::endl;
     }
 }
+
+
+std::ostream &operator<<(std::ostream &out, const Triangle &t) {
+
+}
+
+
+std::istream &operator>>(std::istream &in, Triangle &t) {
+
+}

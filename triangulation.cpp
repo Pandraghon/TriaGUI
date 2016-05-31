@@ -263,6 +263,12 @@ std::ostream& operator<<(std::ostream& out, const Triangulation& t) {
     out << t.m_points.size() << std::endl;
     for(Point* p : t.m_points)
         out << *p << std::endl;
+    out << t.m_segments.size() << std::endl;
+    for(Segment* s : t.m_segments)
+        out << *s << std::endl;
+    out << t.m_triangles.size() << std::endl;
+    for(Triangle* r : t.m_triangles)
+        out << *r << std::endl;
     return out;
 }
 

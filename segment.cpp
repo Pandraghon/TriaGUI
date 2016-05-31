@@ -49,3 +49,16 @@ void Segment::print() const{
 int Segment::getIndex() const {
     return m_index;
 }
+
+
+std::ostream &operator<<(std::ostream &out, const Segment &s) {
+    out << s.m_nom << " "
+        << s.m_points[0]->getIndex() << " "
+        << s.m_points[1]->getIndex();
+    return out;
+}
+
+
+std::istream &operator>>(std::istream &in, Segment &s) {
+
+}

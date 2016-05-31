@@ -430,7 +430,7 @@ public:
         actionZoom->setText(QApplication::translate("MainWindow", "Zoom +", 0));
         actionZoom_2->setText(QApplication::translate("MainWindow", "Zoom -", 0));
         actionRecentrer->setText(QApplication::translate("MainWindow", "Recentrer", 0));
-        actionR_initialiser->setText(QApplication::translate("MainWindow", "R\303\251initialiser", 0));
+        actionR_initialiser->setText(QApplication::translate("MainWindow", "R\303\251initialiser la vue", 0));
         label_3->setText(QApplication::translate("MainWindow", "Triangulation : ", 0));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()

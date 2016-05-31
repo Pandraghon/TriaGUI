@@ -22,11 +22,17 @@ public:
 
     void print() const;
 
+    friend std::ostream& operator<<(std::ostream&, const Triangle&);
+    friend std::istream& operator>>(std::istream&, Triangle&);
+
 private:
     Point* m_points[3];
     Triangle* m_voisins[3];
     std::string m_nom;
     static int nb;
 };
+
+std::ostream& operator<<(std::ostream& out, const Triangle& t);
+std::istream& operator>>(std::istream& in, Triangle& t);
 
 #endif // TRIANGLE_H
