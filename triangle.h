@@ -9,12 +9,17 @@ class Triangle
 {
 public:
     Triangle(Point* p1, Point* p2, Point* p3);
+    Triangle(Segment *s1, Segment *s2, Triangle*** voisins);
     Point* getP0() const;
     Point* getP1() const;
     Point* getP2() const;
+    Point* getP(int i) const;
     void setVoisin(int i, Triangle* t);
-    Triangle* getVoisin(int i);
+    Triangle* getVoisin(int i) const;
     std::string getNom() const;
+    int pos3emePoint(Segment *s);
+    int pos3emePoint(Point* p1, Point* p2);
+
     void print() const;
 
 private:

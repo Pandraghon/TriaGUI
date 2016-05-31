@@ -12,10 +12,13 @@ public:
     Point* getP1() const;
     std::string getNom() const;
     void print() const;
+    int getIndex() const;
 
 private:
+    static int nb;
     Point* m_points[2];
     std::string m_nom;
+    int m_index;
 };
 
 #endif // SEGMENT_H

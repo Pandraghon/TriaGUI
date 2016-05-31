@@ -11,7 +11,8 @@ Point::Point(float x, float y) :
     m_y(y),
 //    m_neighbors(),
     m_segments(),
-    m_nom("P")
+    m_nom("P"),
+    m_index(nb)
 {
     m_nom += std::to_string(nb++);
 }
@@ -24,9 +25,15 @@ Point::Point(float x, float y) :
 }*/
 
 //il faut ajouter ce point de façon a ce que le tableau soit trier dans l'ordre trigo
-void Point::addSegment(Segment* s)  {
-    if(std::find(m_segments.begin(), m_segments.end(), s) == m_segments.end()) {
-        m_segments.push_back(s);
+void Point::addSegment(Segment* s) {
+    //if(std::find(m_segments.begin(), m_segments.end(), s) == m_segments.end()) {
+    //    m_segments.push_back(s);}
+
+    if(m_segments.size() == 0) m_segments.push_back(s);
+    else {
+        std::vector<Segment*>::reverse_iterator it;
+        for(it = m_segments.rbegin() ; it != m_segments.rend() && s->isBefore((Segment*)*it) ; ++it);
+        if(s != *it) m_segments.insert(it.base(), s);
     }
 }
 
@@ -46,11 +53,18 @@ float Point::getY() const {
     return m_y;
 }
 
-// TODO : vérifier si y croissant
+// si les deux point sont egaux?
 bool Point::isBefore(Point *p) const {
     return m_x < p->m_x || m_x == p->m_x && m_y < p->m_y;
 }
 
+Segment* Point::getSegment(int i) const {
+    return m_segments[i];
+}
+
+int Point::nbSegments() const {
+    return m_segments.size();
+}
 
 // a tester
 bool Point::isLeft(Point* p, Point* q) const{
@@ -97,7 +111,10 @@ void Point::print() const {
         std::cout<<"}"<<std::endl;
     }
     std::cout<<std::endl;
+}
 
+int Point::getIndex() const {
+    return m_index;
 }
 
 std::ostream& operator<<(std::ostream& out, const Point& p) {

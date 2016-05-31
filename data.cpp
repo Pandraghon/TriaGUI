@@ -26,6 +26,18 @@ Triangulation *Data::getTriangulation(int index) const {
     return m_triangs.at(index);
 }
 
+int Data::nbTriangulation() const {
+    return m_triangs.size();
+}
+
+void Data::addTriangulation(Triangulation *t) {
+    this->m_triangs.push_back(t);
+}
+
+void Data::nextOrder() {
+    m_triangs.push_back(new Triangulation(this));
+}
+
 
 std::ostream &operator<<(std::ostream &out, const Data &v) {
     out << v.m_triangs.size() << std::endl;

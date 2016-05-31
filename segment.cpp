@@ -1,8 +1,10 @@
 #include "segment.h"
 #include <iostream>
 
+int Segment::nb=0;
+
 Segment::Segment(Point *p1, Point *p2)
-    : m_nom()
+    : m_nom(), m_index(nb)
 {
     if(p1->isBefore(p2)) {
         m_points[0] = p1;
@@ -13,7 +15,8 @@ Segment::Segment(Point *p1, Point *p2)
         m_points[1] = p1;
         p2->addSegment(this);
     }
-    m_nom = m_points[0]->getNom()+m_points[1]->getNom();
+    m_nom = '['+m_points[0]->getNom()+m_points[1]->getNom()+']';
+    nb++;
 }
 
 Point* Segment::getP0() const {
@@ -41,4 +44,8 @@ void Segment::print() const{
             //<<'('<<this->getP1()->getNom()<<')'
             //<<std::endl;
 
+}
+
+int Segment::getIndex() const {
+    return m_index;
 }

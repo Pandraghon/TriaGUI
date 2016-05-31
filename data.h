@@ -16,6 +16,9 @@ public:
 
     std::vector<Triangulation*> getTriangulations() const;
     Triangulation* getTriangulation(int index) const;
+    int nbTriangulation() const;
+    void addTriangulation(Triangulation *t);
+    void nextOrder();
 
     friend std::ostream& operator<<(std::ostream&, const Data&);
     friend std::istream& operator>>(std::istream&, Data&);

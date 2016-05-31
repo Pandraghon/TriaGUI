@@ -18,11 +18,14 @@ public:
     float getX() const;
     float getY() const;
     std::string getNom() const;
+    Segment* getSegment(int i) const;
+    int nbSegments() const;
     bool isBefore(Point* p) const;
     bool isSegment(Point* p);
     bool isLeft(Point* p, Point* q) const;
     bool isLeft(const Segment* pq) const;
     void print() const;
+    int getIndex() const;
 
     friend std::ostream& operator<<(std::ostream&, const Point&);
     friend std::istream& operator>>(std::istream&, Point&);
@@ -33,6 +36,7 @@ private:
     std::vector<Segment*> m_segments;
     std::string m_nom;
     static int nb;
+    int m_index;
 };
 
 std::ostream& operator<<(std::ostream& out, const Point& p);
