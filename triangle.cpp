@@ -179,7 +179,10 @@ void Triangle::print() const {
 
 
 std::ostream &operator<<(std::ostream &out, const Triangle &t) {
-
+    out << t.m_nom << " ";
+    for(int i{} ; i < 3 ; ++i) {
+        //out <<
+    }
 }
 
 

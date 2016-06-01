@@ -247,7 +247,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="resource.qrc">
+                   <iconset>
                     <normaloff>:/images/Desktop/_PNG 64_/software_paintbrush.png</normaloff>:/images/Desktop/_PNG 64_/software_paintbrush.png</iconset>
                   </property>
                  </widget>
@@ -343,7 +343,7 @@
   <action name="actionNouveau">
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_sheet.png</normaloff>:/images/Desktop/_PNG 64_/basic_sheet.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_sheet.png</normaloff>:/image/resources/_PNG 64_/basic_sheet.png</iconset>
    </property>
    <property name="text">
     <string>Nouveau</string>
@@ -352,7 +352,7 @@
   <action name="actionEnregistrer">
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_floppydisk.png</normaloff>:/images/Desktop/_PNG 64_/basic_floppydisk.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_floppydisk.png</normaloff>:/image/resources/_PNG 64_/basic_floppydisk.png</iconset>
    </property>
    <property name="text">
     <string>Enregistrer</string>
@@ -366,7 +366,7 @@
   <action name="actionOuvrir">
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_folder.png</normaloff>:/images/Desktop/_PNG 64_/basic_folder.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_folder.png</normaloff>:/image/resources/_PNG 64_/basic_folder.png</iconset>
    </property>
    <property name="text">
     <string>Ouvrir</string>
@@ -375,7 +375,7 @@
   <action name="actionExporter">
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_download.png</normaloff>:/images/Desktop/_PNG 64_/basic_download.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_download.png</normaloff>:/image/resources/_PNG 64_/basic_download.png</iconset>
    </property>
    <property name="text">
     <string>Exporter</string>
@@ -384,7 +384,7 @@
   <action name="actionImporter">
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_upload.png</normaloff>:/images/Desktop/_PNG 64_/basic_upload.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_upload.png</normaloff>:/image/resources/_PNG 64_/basic_upload.png</iconset>
    </property>
    <property name="text">
     <string>Importer</string>
@@ -396,7 +396,7 @@
    </property>
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_mouse.png</normaloff>:/images/Desktop/_PNG 64_/basic_mouse.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_mouse.png</normaloff>:/image/resources/_PNG 64_/basic_mouse.png</iconset>
    </property>
    <property name="text">
     <string>Selection</string>
@@ -411,7 +411,7 @@
    </property>
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/software_pencil.png</normaloff>:/images/Desktop/_PNG 64_/software_pencil.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/software_pencil.png</normaloff>:/image/resources/_PNG 64_/software_pencil.png</iconset>
    </property>
    <property name="text">
     <string>Point</string>
@@ -426,7 +426,7 @@
    </property>
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_pencil_ruler.png</normaloff>:/images/Desktop/_PNG 64_/basic_pencil_ruler.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_pencil_ruler.png</normaloff>:/image/resources/_PNG 64_/basic_pencil_ruler.png</iconset>
    </property>
    <property name="text">
     <string>Segment</string>
@@ -441,7 +441,7 @@
    </property>
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/software_slice.png</normaloff>:/images/Desktop/_PNG 64_/software_slice.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/software_slice.png</normaloff>:/image/resources/_PNG 64_/software_slice.png</iconset>
    </property>
    <property name="text">
     <string>Suppression</string>
@@ -458,7 +458,7 @@
   <action name="actionZoom">
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_magnifier_plus.png</normaloff>:/images/Desktop/_PNG 64_/basic_magnifier_plus.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_magnifier_plus.png</normaloff>:/image/resources/_PNG 64_/basic_magnifier_plus.png</iconset>
    </property>
    <property name="text">
     <string>Zoom +</string>
@@ -467,7 +467,7 @@
   <action name="actionZoom_2">
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_magnifier_minus.png</normaloff>:/images/Desktop/_PNG 64_/basic_magnifier_minus.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_magnifier_minus.png</normaloff>:/image/resources/_PNG 64_/basic_magnifier_minus.png</iconset>
    </property>
    <property name="text">
     <string>Zoom -</string>
@@ -476,7 +476,7 @@
   <action name="actionRecentrer">
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_gunsight.png</normaloff>:/images/Desktop/_PNG 64_/basic_gunsight.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_gunsight.png</normaloff>:/image/resources/_PNG 64_/basic_gunsight.png</iconset>
    </property>
    <property name="text">
     <string>Recentrer</string>
@@ -485,7 +485,7 @@
   <action name="actionR_initialiser">
    <property name="icon">
     <iconset resource="resource.qrc">
-     <normaloff>:/images/Desktop/_PNG 64_/basic_target.png</normaloff>:/images/Desktop/_PNG 64_/basic_target.png</iconset>
+     <normaloff>:/image/resources/_PNG 64_/basic_target.png</normaloff>:/image/resources/_PNG 64_/basic_target.png</iconset>
    </property>
    <property name="text">
     <string>Réinitialiser la vue</string>
