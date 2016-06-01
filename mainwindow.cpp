@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect(ui->colorButton, &QPushButton::clicked, this, &MainWindow::chooseColor);
     QObject::connect(ui->isVisible, &QCheckBox::clicked, this, &MainWindow::manageVisibility);
+    QObject::connect(ui->generateButton, &QPushButton::clicked, this, &MainWindow::generate);
 
     // Toolbar
     QObject::connect(ui->actionEnregistrer, &QAction::triggered, this, &MainWindow::save);
@@ -97,6 +98,9 @@ QMessageBox::StandardButton MainWindow::saveQuestion() const {
     b.setText(tr("Les données ont été modifiées."));
     b.setInformativeText(tr("Voulez-vous enregistrer les modifications ?"));
     b.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+    b.setButtonText(QMessageBox::Save, tr("Sauvegarder"));
+    b.setButtonText(QMessageBox::Discard, tr("Ne pas sauvegarder"));
+    b.setButtonText(QMessageBox::Cancel, tr("Annuler"));
     b.setDefaultButton(QMessageBox::Save);
     return static_cast<QMessageBox::StandardButton>(b.exec());
 }
@@ -172,6 +176,15 @@ void MainWindow::manageVisibility() {
     // Hack pour faire redessiner la scene
     graphicsView->zoom(2.0);
     graphicsView->zoom(0.5);
+    setModified();
+}
+
+void MainWindow::generate() {
+    Triangulation* t = data.getTriangulation(currentTriang);
+    t->scanTriangles();
+    for(auto r : t->getTriangles()) {
+        graphicsScene->addTriangle(r, currentTriang);
+    }
     setModified();
 }
 

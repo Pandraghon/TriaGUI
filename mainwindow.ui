@@ -247,10 +247,28 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
-                    <normaloff>:/images/Desktop/_PNG 64_/software_paintbrush.png</normaloff>:/images/Desktop/_PNG 64_/software_paintbrush.png</iconset>
+                   <iconset resource="resource.qrc">
+                    <normaloff>:/image/resources/_PNG 64_/software_paintbrush.png</normaloff>:/image/resources/_PNG 64_/software_paintbrush.png</iconset>
                   </property>
                  </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_4">
+                  <item>
+                   <widget class="QPushButton" name="generateButton">
+                    <property name="text">
+                     <string>Trianguler</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="nextOrderButton">
+                    <property name="text">
+                     <string>Ordre suivant</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                </layout>
               </item>

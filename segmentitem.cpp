@@ -11,8 +11,7 @@ SegmentItem::SegmentItem(Segment *segment, QColor *color, bool *visibility, QGra
     color(color),
     visibility(visibility),
     selected(false)
-{
-}
+{}
 
 QRectF SegmentItem::boundingRect() const {
     QPointF p1{segment->getP0()->getX(), segment->getP0()->getY()},

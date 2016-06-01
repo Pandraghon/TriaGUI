@@ -6,7 +6,8 @@ int Triangle::nb=0;
 
 Triangle::Triangle(Point* p1, Point* p2, Point* p3):
     m_points(),
-    m_voisins()
+    m_voisins(),
+    m_index(nb++)
 {
     if(p1->isBefore(p2)) {
         if(p3->isBefore(p1)) {
@@ -164,6 +165,10 @@ int Triangle::pos3emePoint(Point *p1, Point *p2) {
     }
 }
 
+int Triangle::getIndex() const {
+    return m_index;
+}
+
 void Triangle::print() const {
     std::cout<<m_nom;
     if(m_voisins[0]!=NULL||m_voisins[1]!=NULL||m_voisins[2]!=NULL)
@@ -179,9 +184,16 @@ void Triangle::print() const {
 
 
 std::ostream &operator<<(std::ostream &out, const Triangle &t) {
-    out << t.m_nom << " ";
+    out << t.m_nom;
     for(int i{} ; i < 3 ; ++i) {
-        //out <<
+        out << " ";
+        if(t.m_points[i] == NULL) out << "-1";
+        else                      out << t.m_points[i]->getIndex();
+    }
+    for(int i{} ; i < 3 ; ++i) {
+        out << " ";
+        if(t.m_voisins[i] == NULL) out << "-1";
+        else                       out << t.m_voisins[i]->getIndex();
     }
 }
 

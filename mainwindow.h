@@ -57,6 +57,7 @@ private slots:
     void changeColor(const QColor& col);
     void manageMode();
     void manageVisibility();
+    void generate();
     void save(bool forced = false);
     void saveAs();
     void load();

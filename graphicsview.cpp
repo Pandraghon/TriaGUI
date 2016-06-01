@@ -28,8 +28,7 @@ void GraphicsView::wheelEvent(QWheelEvent *event) {
     }
 }
 
-void GraphicsView::zoom(double factor)
-{
+void GraphicsView::zoom(double factor) {
     scaleFactor *= factor;
     if(wheel) {
         setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
@@ -39,22 +38,18 @@ void GraphicsView::zoom(double factor)
     scale(factor, factor);
     wheel = false;
     QRectF rect = scene()->itemsBoundingRect();
-    qDebug() << Q_FUNC_INFO << rect;
     if(rect.isNull()) {
         scene()->setSceneRect(QRectF(0, 0, 1, 1));
     } else {
-        qDebug() << Q_FUNC_INFO << rect;
         scene()->setSceneRect(rect);
     }
 }
 
 void GraphicsView::zoomIn() {
-    qDebug() << Q_FUNC_INFO << tr("ZOOM IN");
     zoom(1.15);
 }
 
 void GraphicsView::zoomOut() {
-    qDebug() << Q_FUNC_INFO << tr("ZOOM OUT");
     zoom(1.0 / 1.15);
 }
 
@@ -68,6 +63,5 @@ void GraphicsView::likeANewBorn() {
 }
 
 void GraphicsView::drag(const QPointF &delta) {
-    qDebug() << Q_FUNC_INFO << tr("TRANSLATE");
     translate(delta.x(), delta.y());
 }

@@ -6,10 +6,12 @@
 #include <QPainter>
 
 #include "data.h"
-#include "segmentitem.h"
-#include "segment.h"
-#include "pointitem.h"
 #include "point.h"
+#include "pointitem.h"
+#include "segment.h"
+#include "segmentitem.h"
+#include "triangle.h"
+#include "triangleitem.h"
 
 class GraphicsScene : public QGraphicsScene
 {
@@ -20,6 +22,7 @@ public:
     explicit GraphicsScene(Data *data, QObject *parent = 0);
     void addPoint(Point *p, int indexOfTriangulation);
     void addSegment(Segment *s, int indexOfTriangulation);
+    void addTriangle(Triangle* t, int indexOfTriangulation);
     void setMode(MODE mode);
 
 private:

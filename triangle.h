@@ -19,6 +19,7 @@ public:
     std::string getNom() const;
     int pos3emePoint(Segment *s);
     int pos3emePoint(Point* p1, Point* p2);
+    int getIndex() const;
 
     void print() const;
 
@@ -29,6 +30,7 @@ private:
     Point* m_points[3];
     Triangle* m_voisins[3];
     std::string m_nom;
+    int m_index;
     static int nb;
 };
 

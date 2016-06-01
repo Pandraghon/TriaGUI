@@ -80,6 +80,9 @@ public:
     QVBoxLayout *verticalLayout_2;
     QCheckBox *isVisible;
     QPushButton *colorButton;
+    QHBoxLayout *horizontalLayout_4;
+    QPushButton *generateButton;
+    QPushButton *nextOrderButton;
     QMenuBar *menuBar;
     QMenu *menuFichier;
     QMenu *menuDessin;
@@ -96,76 +99,76 @@ public:
         actionNouveau = new QAction(MainWindow);
         actionNouveau->setObjectName(QStringLiteral("actionNouveau"));
         QIcon icon;
-        icon.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_sheet.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_sheet.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionNouveau->setIcon(icon);
         actionEnregistrer = new QAction(MainWindow);
         actionEnregistrer->setObjectName(QStringLiteral("actionEnregistrer"));
         QIcon icon1;
-        icon1.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_floppydisk.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_floppydisk.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionEnregistrer->setIcon(icon1);
         actionEnregistrer_sous = new QAction(MainWindow);
         actionEnregistrer_sous->setObjectName(QStringLiteral("actionEnregistrer_sous"));
         actionOuvrir = new QAction(MainWindow);
         actionOuvrir->setObjectName(QStringLiteral("actionOuvrir"));
         QIcon icon2;
-        icon2.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_folder.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_folder.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionOuvrir->setIcon(icon2);
         actionExporter = new QAction(MainWindow);
         actionExporter->setObjectName(QStringLiteral("actionExporter"));
         QIcon icon3;
-        icon3.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_download.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_download.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionExporter->setIcon(icon3);
         actionImporter = new QAction(MainWindow);
         actionImporter->setObjectName(QStringLiteral("actionImporter"));
         QIcon icon4;
-        icon4.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_upload.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon4.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_upload.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionImporter->setIcon(icon4);
         actionSelection = new QAction(MainWindow);
         actionSelection->setObjectName(QStringLiteral("actionSelection"));
         actionSelection->setCheckable(true);
         QIcon icon5;
-        icon5.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_mouse.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon5.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_mouse.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionSelection->setIcon(icon5);
         actionPoint = new QAction(MainWindow);
         actionPoint->setObjectName(QStringLiteral("actionPoint"));
         actionPoint->setCheckable(true);
         actionPoint->setChecked(true);
         QIcon icon6;
-        icon6.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/software_pencil.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon6.addFile(QStringLiteral(":/image/resources/_PNG 64_/software_pencil.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionPoint->setIcon(icon6);
         actionSegment = new QAction(MainWindow);
         actionSegment->setObjectName(QStringLiteral("actionSegment"));
         actionSegment->setCheckable(true);
         QIcon icon7;
-        icon7.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_pencil_ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon7.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_pencil_ruler.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionSegment->setIcon(icon7);
         actionSuppression = new QAction(MainWindow);
         actionSuppression->setObjectName(QStringLiteral("actionSuppression"));
         actionSuppression->setCheckable(true);
         QIcon icon8;
-        icon8.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/software_slice.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon8.addFile(QStringLiteral(":/image/resources/_PNG 64_/software_slice.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionSuppression->setIcon(icon8);
         actionTout_effacer = new QAction(MainWindow);
         actionTout_effacer->setObjectName(QStringLiteral("actionTout_effacer"));
         actionZoom = new QAction(MainWindow);
         actionZoom->setObjectName(QStringLiteral("actionZoom"));
         QIcon icon9;
-        icon9.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_magnifier_plus.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon9.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_magnifier_plus.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionZoom->setIcon(icon9);
         actionZoom_2 = new QAction(MainWindow);
         actionZoom_2->setObjectName(QStringLiteral("actionZoom_2"));
         QIcon icon10;
-        icon10.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_magnifier_minus.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon10.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_magnifier_minus.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionZoom_2->setIcon(icon10);
         actionRecentrer = new QAction(MainWindow);
         actionRecentrer->setObjectName(QStringLiteral("actionRecentrer"));
         QIcon icon11;
-        icon11.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_gunsight.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon11.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_gunsight.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRecentrer->setIcon(icon11);
         actionR_initialiser = new QAction(MainWindow);
         actionR_initialiser->setObjectName(QStringLiteral("actionR_initialiser"));
         QIcon icon12;
-        icon12.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/basic_target.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon12.addFile(QStringLiteral(":/image/resources/_PNG 64_/basic_target.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionR_initialiser->setIcon(icon12);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
@@ -328,10 +331,26 @@ public:
         colorButton->setObjectName(QStringLiteral("colorButton"));
         colorButton->setAutoFillBackground(true);
         QIcon icon13;
-        icon13.addFile(QStringLiteral(":/images/Desktop/_PNG 64_/software_paintbrush.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon13.addFile(QStringLiteral(":/image/resources/_PNG 64_/software_paintbrush.png"), QSize(), QIcon::Normal, QIcon::Off);
         colorButton->setIcon(icon13);
 
         verticalLayout_2->addWidget(colorButton);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        generateButton = new QPushButton(groupBox);
+        generateButton->setObjectName(QStringLiteral("generateButton"));
+
+        horizontalLayout_4->addWidget(generateButton);
+
+        nextOrderButton = new QPushButton(groupBox);
+        nextOrderButton->setObjectName(QStringLiteral("nextOrderButton"));
+
+        horizontalLayout_4->addWidget(nextOrderButton);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_4);
 
 
         verticalLayout_5->addLayout(verticalLayout_2);
@@ -445,6 +464,8 @@ public:
         groupBox->setTitle(QApplication::translate("MainWindow", "Triangulation courante :", 0));
         isVisible->setText(QApplication::translate("MainWindow", "Visible", 0));
         colorButton->setText(QString());
+        generateButton->setText(QApplication::translate("MainWindow", "Trianguler", 0));
+        nextOrderButton->setText(QApplication::translate("MainWindow", "Ordre suivant", 0));
         menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", 0));
         menuDessin->setTitle(QApplication::translate("MainWindow", "Dessin", 0));
         menuMode->setTitle(QApplication::translate("MainWindow", "Mode", 0));

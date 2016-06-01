@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     graphicsscene.cpp \
     pointitem.cpp \
     graphicsview.cpp \
-    segmentitem.cpp
+    segmentitem.cpp \
+    triangleitem.cpp
 
 HEADERS  += mainwindow.h \
     pointstablemodel.h \
@@ -41,7 +42,8 @@ HEADERS  += mainwindow.h \
     graphicsscene.h \
     pointitem.h \
     graphicsview.h \
-    segmentitem.h
+    segmentitem.h \
+    triangleitem.h
 
 FORMS    += mainwindow.ui \
     pointstablemodel.ui
