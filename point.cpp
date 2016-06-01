@@ -120,13 +120,15 @@ int Point::getIndex() const {
 std::ostream& operator<<(std::ostream& out, const Point& p) {
     out << p.m_nom << " "
         << p.m_x << " "
-        << p.m_y;
+        << p.m_y << " "
+        << p.m_index;
     return out;
 }
 
 std::istream& operator>>(std::istream& in, Point& p) {
     in >> p.m_nom
        >> p.m_x
-       >> p.m_y;
+       >> p.m_y
+       >> p.m_index;
     return in;
 }
