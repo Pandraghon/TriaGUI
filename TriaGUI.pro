@@ -23,7 +23,6 @@ SOURCES += main.cpp\
     data.cpp \
     segment.cpp \
     segmentstablemodel.cpp \
-    renderarea.cpp \
     graphicsscene.cpp \
     pointitem.cpp \
     graphicsview.cpp \
@@ -38,7 +37,6 @@ HEADERS  += mainwindow.h \
     data.h \
     segment.h \
     segmentstablemodel.h \
-    renderarea.h \
     graphicsscene.h \
     pointitem.h \
     graphicsview.h \

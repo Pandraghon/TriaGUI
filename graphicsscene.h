@@ -24,12 +24,17 @@ public:
     void addSegment(Segment *s, int indexOfTriangulation);
     void addTriangle(Triangle* t, int indexOfTriangulation);
     void setMode(MODE mode);
+    void paintTriangulation(int index);
+    void paintTriangulation(Triangulation* tri, int i);
+
+    static const QColor& color(int i);
+    static bool visibility(int i);
 
 private:
     Data *data;
     MODE mode;
-    QVector<QColor> colorOfTriangulation;
-    QVector<bool> visibilityOfTriangulation;
+    static QVector<QColor> colorOfTriangulation;
+    static QVector<bool> visibilityOfTriangulation;
     QVector<PointItem*> pointsSelected;
     QPointF lastMousePos;
     //PointItem* ps1; //points of segment
@@ -54,8 +59,8 @@ public slots:
     void setSelectionMode();
     void managePointClick(PointItem* p);
 
-    void setColor(int indexTriangulation, const QColor& color);
-    void setVisibility(int indexTriangulation, bool visibility);
+    static void setColor(int indexTriangulation, const QColor& color);
+    static void setVisibility(int indexTriangulation, bool visibility);
 
 };
 

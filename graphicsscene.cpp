@@ -3,12 +3,15 @@
 #include <QDebug>
 #include "triangulation.h"
 
+QVector<bool> GraphicsScene::visibilityOfTriangulation(1, true);
+QVector<QColor> GraphicsScene::colorOfTriangulation(1, Qt::green);
+
 GraphicsScene::GraphicsScene(Data *data, QObject *parent) :
     QGraphicsScene(parent),
     data(data),
     mode(POINT),
-    colorOfTriangulation(1, Qt::green),
-    visibilityOfTriangulation(1, true),
+//    colorOfTriangulation(1, Qt::green),
+//    visibilityOfTriangulation(1, true),
     pointsSelected(0),
     lastMousePos()/*,
     ps1(nullptr),
@@ -20,7 +23,7 @@ GraphicsScene::GraphicsScene(Data *data, QObject *parent) :
 }
 
 void GraphicsScene::addPoint(Point* p, int indexOfTriangulation) {
-    PointItem* pi{new PointItem(p, &(colorOfTriangulation[indexOfTriangulation]), &(visibilityOfTriangulation[indexOfTriangulation]))};
+    PointItem* pi{new PointItem(p, indexOfTriangulation)};
     addItem(pi);
     for(auto i : selectedItems()) ((PointItem*)i)->select(false);
     //for(auto i : pointsSelected) i->select(false);
@@ -30,12 +33,12 @@ void GraphicsScene::addPoint(Point* p, int indexOfTriangulation) {
 }
 
 void GraphicsScene::addSegment(Segment *s, int indexOfTriangulation) {
-    SegmentItem* si{new SegmentItem(s, &(colorOfTriangulation[indexOfTriangulation]), &(visibilityOfTriangulation[indexOfTriangulation]))};
+    SegmentItem* si{new SegmentItem(s, indexOfTriangulation)};
     addItem(si);
 }
 
 void GraphicsScene::addTriangle(Triangle *t, int indexOfTriangulation) {
-    TriangleItem* ti{new TriangleItem(t, &(colorOfTriangulation[indexOfTriangulation]), &(visibilityOfTriangulation[indexOfTriangulation]))};
+    TriangleItem* ti{new TriangleItem(t, indexOfTriangulation)};
     addItem(ti);
 }
 
@@ -102,13 +105,33 @@ void GraphicsScene::clickOnSelection(const QPointF &pos) {
 }
 
 void GraphicsScene::paint() {
-    Triangulation* tri;
-    for(unsigned int i{} ; i < data->getTriangulations().size() && (tri = data->getTriangulation(i)) ; ++i) {
-        for(auto p : tri->getPoints()) {
-            addPoint(p, i);
-        }
+    for(unsigned int i{} ; i < data->getTriangulations().size() ; ++i) {
+        paintTriangulation(i);
     }
+}
 
+void GraphicsScene::paintTriangulation(int index) {
+    paintTriangulation(data->getTriangulation(index), index);
+}
+
+void GraphicsScene::paintTriangulation(Triangulation *tri, int i) {
+    for(auto p : tri->getPoints()) {
+        addPoint(p, i);
+    }
+    for(auto s : tri->getSegments()) {
+        addSegment(s, i);
+    }
+    for(auto t : tri->getTriangles()) {
+        addTriangle(t, i);
+    }
+}
+
+const QColor &GraphicsScene::color(int i) {
+    return colorOfTriangulation.at(i);
+}
+
+bool GraphicsScene::visibility(int i) {
+    return visibilityOfTriangulation.at(i);
 }
 
 void GraphicsScene::setSelectionMode() {
@@ -120,9 +143,12 @@ void GraphicsScene::managePointClick(PointItem *p) {
 }
 
 void GraphicsScene::setColor(int indexTriangulation, const QColor &color) {
+    if(colorOfTriangulation.size() <= indexTriangulation) colorOfTriangulation.resize(indexTriangulation + 1);
     colorOfTriangulation[indexTriangulation] = color;
+
 }
 
 void GraphicsScene::setVisibility(int indexTriangulation, bool visibility) {
+    if(visibilityOfTriangulation.size() <= indexTriangulation) visibilityOfTriangulation.resize(indexTriangulation + 1);
     visibilityOfTriangulation[indexTriangulation] = visibility;
 }

@@ -11,7 +11,7 @@ class QGraphicsSceneMouseEvent;
 
 class SegmentItem : public QGraphicsItem {
 public:
-    explicit SegmentItem(Segment* segment, QColor* color, bool* visibility, QGraphicsItem *parent = 0);
+    explicit SegmentItem(Segment* segment, int indexOfTriangulation, QGraphicsItem *parent = 0);
     virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
     virtual QPainterPath shape() const Q_DECL_OVERRIDE;
@@ -21,8 +21,7 @@ public:
 
 private:
     Segment* segment;
-    QColor* color;
-    bool* visibility;
+    int indexOfTriangulation;
     bool selected;
 
 signals:

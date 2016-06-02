@@ -1,16 +1,17 @@
 #include "triangleitem.h"
 
+#include "graphicsscene.h"
+
 #include <QPainter>
 #include <QPainterPath>
 #include <QPolygon>
 
 #include <QDebug>
 
-TriangleItem::TriangleItem(Triangle *triangle, QColor *color, bool *visibility, QGraphicsItem *parent) :
+TriangleItem::TriangleItem(Triangle *triangle, int indexOfTriangulation, QGraphicsItem *parent) :
     QGraphicsItem(parent),
     triangle(triangle),
-    color(color),
-    visibility(visibility)
+    indexOfTriangulation(indexOfTriangulation)
 {}
 
 QRectF TriangleItem::boundingRect() const {
@@ -20,7 +21,7 @@ QRectF TriangleItem::boundingRect() const {
 }
 
 void TriangleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget */*widget*/) {
-    if(!*visibility) return;
+    if(!GraphicsScene::visibility(indexOfTriangulation)) return;
     QTransform t = painter->transform();
     qreal m11 = t.m11(), m22 = t.m22();
     painter->save();
@@ -40,7 +41,7 @@ void TriangleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*op
     path.addPolygon(poly);
 
     //painter->drawPolygon(poly);
-    QBrush b(*color, Qt::SolidPattern);
+    QBrush b(GraphicsScene::color(indexOfTriangulation), Qt::SolidPattern);
     //if(triangle->isGenerated()) b.setStyle(Qt::FDiagPattern);
     painter->fillPath(path, b);
     painter->restore();

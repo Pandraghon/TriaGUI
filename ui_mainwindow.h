@@ -59,7 +59,7 @@ public:
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_3;
-    QComboBox *comboBox;
+    QComboBox *triBox;
     QLabel *label;
     QTableView *tabPoints;
     QLabel *label_2;
@@ -206,15 +206,15 @@ public:
 
         horizontalLayout_3->addWidget(label_3);
 
-        comboBox = new QComboBox(frame);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
+        triBox = new QComboBox(frame);
+        triBox->setObjectName(QStringLiteral("triBox"));
         QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(comboBox->sizePolicy().hasHeightForWidth());
-        comboBox->setSizePolicy(sizePolicy1);
+        sizePolicy1.setHeightForWidth(triBox->sizePolicy().hasHeightForWidth());
+        triBox->setSizePolicy(sizePolicy1);
 
-        horizontalLayout_3->addWidget(comboBox);
+        horizontalLayout_3->addWidget(triBox);
 
 
         verticalLayout_3->addLayout(horizontalLayout_3);
@@ -451,8 +451,8 @@ public:
         actionRecentrer->setText(QApplication::translate("MainWindow", "Recentrer", 0));
         actionR_initialiser->setText(QApplication::translate("MainWindow", "R\303\251initialiser la vue", 0));
         label_3->setText(QApplication::translate("MainWindow", "Triangulation : ", 0));
-        comboBox->clear();
-        comboBox->insertItems(0, QStringList()
+        triBox->clear();
+        triBox->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "Degr\303\251 1", 0)
         );
         label->setText(QApplication::translate("MainWindow", "Liste des points :", 0));

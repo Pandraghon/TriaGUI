@@ -55,9 +55,11 @@ private slots:
     void redraw(const Point &p1, const Point &p2);
     void chooseColor();
     void changeColor(const QColor& col);
+    void changeDegree(int degree);
     void manageMode();
     void manageVisibility();
     void generate();
+    void nextOrder();
     void save(bool forced = false);
     void saveAs();
     void load();

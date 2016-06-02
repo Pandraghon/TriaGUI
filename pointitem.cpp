@@ -1,13 +1,14 @@
 #include "pointitem.h"
 
+#include "graphicsscene.h"
+
 #include <QDebug>
 #include <QBrush>
 
-PointItem::PointItem(Point* point, QColor *color, bool *visibility, QGraphicsItem *parent) :
+PointItem::PointItem(Point* point, int indexOfTriangulation, QGraphicsItem *parent) :
     QGraphicsItem(parent),
     point(point),
-    color(color),
-    visibility(visibility),
+    indexOfTriangulation(indexOfTriangulation),
     bounds()
 {
     setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable);
@@ -19,12 +20,12 @@ QRectF PointItem::boundingRect() const {
 }
 
 void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/, QWidget * /*widget*/) {
-    if(!*visibility) return;
+    if(!GraphicsScene::visibility(indexOfTriangulation)) return;
     // @see http://stackoverflow.com/a/24874013
     QTransform t = painter->transform();
     qreal m11 = t.m11(), m22 = t.m22();
     painter->save();
-    painter->setBrush(QBrush(*color));
+    painter->setBrush(QBrush(GraphicsScene::color(indexOfTriangulation)));
     painter->setTransform(QTransform(1, t.m12(), t.m13(),
                                          t.m21(), 1, t.m23(), t.m31(),
                                          t.m32(), t.m33()));

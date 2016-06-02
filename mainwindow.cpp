@@ -56,6 +56,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->colorButton, &QPushButton::clicked, this, &MainWindow::chooseColor);
     QObject::connect(ui->isVisible, &QCheckBox::clicked, this, &MainWindow::manageVisibility);
     QObject::connect(ui->generateButton, &QPushButton::clicked, this, &MainWindow::generate);
+    QObject::connect(ui->nextOrderButton, &QPushButton::clicked, this, &MainWindow::nextOrder);
+    QObject::connect(ui->triBox, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &MainWindow::changeDegree);
 
     // Toolbar
     QObject::connect(ui->actionEnregistrer, &QAction::triggered, this, &MainWindow::save);
@@ -157,6 +159,17 @@ void MainWindow::changeColor(const QColor &col) {
     setModified();
 }
 
+void MainWindow::changeDegree(int degree) {
+    ui->isVisible->setChecked(GraphicsScene::visibility(degree));
+    QString qss = QString("background-color: %1").arg(GraphicsScene::color(degree).name());
+    ui->colorButton->setStyleSheet(qss);
+    currentTriang = degree;
+    pointsTableModel->setTriangulation(data.getTriangulation(degree));
+    ui->tabPoints->model()->layoutChanged();
+    segmentsTableModel->setTriangulation(data.getTriangulation(degree));
+    ui->tabSegments->model()->layoutChanged();
+}
+
 void MainWindow::manageMode() {
     graphicsView->setDragMode(QGraphicsView::NoDrag);
     if(actionGroup->checkedAction() == ui->actionSelection) {
@@ -185,6 +198,19 @@ void MainWindow::generate() {
     for(auto r : t->getTriangles()) {
         graphicsScene->addTriangle(r, currentTriang);
     }
+    setModified();
+}
+
+void MainWindow::nextOrder() {
+    Triangulation* t = new Triangulation(&data);
+
+    currentTriang = data.nbTriangulation() - 1;
+    GraphicsScene::setVisibility(currentTriang, true);
+    GraphicsScene::setColor(currentTriang, Qt::red);
+    graphicsScene->paintTriangulation(t, currentTriang);
+    ui->triBox->addItem(QString("Degré %1").arg(currentTriang + 1));
+    ui->triBox->setCurrentIndex(currentTriang);
+    //changeDegree(currentTriang);
     setModified();
 }
 

@@ -12,7 +12,7 @@ public:
     static const int rad = 2;
     static const int selectionRad = 5;
 
-    explicit PointItem(Point* point, QColor* color, bool* visibility, QGraphicsItem *parent = 0);
+    explicit PointItem(Point* point, int indexOfTriangulation, QGraphicsItem *parent = 0);
 
     virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
@@ -23,8 +23,7 @@ public:
 
 private:
     Point* point;
-    QColor* color;
-    bool* visibility;
+    int indexOfTriangulation;
     QRectF bounds;
 
 signals:
