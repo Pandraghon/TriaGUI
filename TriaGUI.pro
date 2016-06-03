@@ -41,7 +41,8 @@ HEADERS  += mainwindow.h \
     pointitem.h \
     graphicsview.h \
     segmentitem.h \
-    triangleitem.h
+    triangleitem.h \
+    simple_svg_1.0.0.hpp
 
 FORMS    += mainwindow.ui \
     pointstablemodel.ui

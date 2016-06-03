@@ -62,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Toolbar
     QObject::connect(ui->actionEnregistrer, &QAction::triggered, this, &MainWindow::save);
     QObject::connect(ui->actionEnregistrer_sous, &QAction::triggered, this, &MainWindow::saveAs);
+    QObject::connect(ui->actionExporter, &QAction::triggered, this, &MainWindow::exportToSVG);
     QObject::connect(ui->actionOuvrir, &QAction::triggered, this, &MainWindow::load);
     QObject::connect(ui->actionZoom, &QAction::triggered, graphicsView, &GraphicsView::zoomIn);
     QObject::connect(ui->actionZoom_2, &QAction::triggered, graphicsView, &GraphicsView::zoomOut);
@@ -230,6 +231,14 @@ void MainWindow::save(bool forced) {
 
 void MainWindow::saveAs() {
     save(true);
+}
+
+void MainWindow::exportToSVG() {
+    QString filename = QFileDialog::getSaveFileName(this, tr("Exporter"), "files/", tr("SVG Files (*.svg)"));
+    if(filename.isNull()) return;
+
+    qDebug() << "Exporting in " << filename;
+    data.exportToEPS(filename.toStdString());
 }
 
 void MainWindow::load() {

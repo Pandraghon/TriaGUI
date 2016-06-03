@@ -1,4 +1,5 @@
 #include "data.h"
+#include "simple_svg_1.0.0.hpp"
 
 Data::Data() :
     m_triangs(1, new Triangulation()),
@@ -36,6 +37,21 @@ void Data::addTriangulation(Triangulation *t) {
 
 void Data::nextOrder() {
     m_triangs.push_back(new Triangulation(this));
+}
+
+void Data::exportToEPS(const std::string &filename) {
+    svg::Dimensions dim(1000, 1000);
+    svg::Document doc(filename, svg::Layout(dim, svg::Layout::BottomLeft));
+
+    for(unsigned int i{} ; i < m_triangs.size() ; ++i) {
+        for(auto t : m_triangs[i]->getTriangles()) {
+            doc << (svg::Polygon(svg::Color(100, 100, 100), svg::Stroke(1, svg::Color(50, 50, 50)))
+                    << svg::Point(t->getP0()->getX(), t->getP0()->getY())
+                    << svg::Point(t->getP1()->getX(), t->getP1()->getY())
+                    << svg::Point(t->getP2()->getX(), t->getP2()->getY()));
+        }
+    }
+    doc.save();
 }
 
 

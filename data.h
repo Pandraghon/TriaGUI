@@ -20,6 +20,8 @@ public:
     void addTriangulation(Triangulation *t);
     void nextOrder();
 
+    void exportToEPS(const std::string& filename);
+
     friend std::ostream& operator<<(std::ostream&, const Data&);
     friend std::istream& operator>>(std::istream&, Data&);
 

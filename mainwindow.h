@@ -62,6 +62,7 @@ private slots:
     void nextOrder();
     void save(bool forced = false);
     void saveAs();
+    void exportToSVG();
     void load();
 };
 
