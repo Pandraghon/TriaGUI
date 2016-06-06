@@ -26,10 +26,12 @@ public:
     void setMode(MODE mode);
     void paintTriangulation(int index);
     void paintTriangulation(Triangulation* tri, int i);
-    //void clear();
 
+    static void reset();
     static const QColor& color(int i);
     static bool visibility(int i);
+
+    friend std::ostream& operator<<(std::ostream&, const GraphicsScene&);
 
 private:
     Data *data;
@@ -62,5 +64,7 @@ public slots:
     static void setVisibility(int indexTriangulation, bool visibility);
 
 };
+
+std::ostream& operator<<(std::ostream& out, const GraphicsScene& v);
 
 #endif // GRAPHICSSCENE_H

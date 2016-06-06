@@ -452,12 +452,42 @@ std::ostream& operator<<(std::ostream& out, const Triangulation& t) {
     return out;
 }
 
-std::istream& operator>>(std::istream& in, Triangulation* t) {
+std::istream& operator>>(std::istream& in, Triangulation& t) {
     int ptSize, segSize, triSize;
     in >> ptSize;
-    t->m_points.resize(ptSize);
+    t.m_points.resize(ptSize);
     for(unsigned int i{} ; i < ptSize ; ++i) {
-        t->m_points[i];
+        Point p;
+        in >> p;
+        t.m_points[i] = new Point(p);
+    }
+    in >> segSize;
+    t.m_segments.resize(segSize);
+    for(unsigned int i{} ; i < segSize ; ++i) {
+        int p1, p2;
+        in >> p1 >> p2;
+        t.m_segments[i] = new Segment(t.m_points[p1], t.m_points[p2]);
+    }
+    in >> triSize;
+    t.m_triangles.resize(triSize);
+    for(unsigned int i{} ; i < triSize ; ++i) {
+        Point* tp[3];
+        for(int i{} ; i < 3 ; ++i) {
+            int p;
+            in >> p;
+            if(p == -1) tp[i] = NULL;
+            else        tp[i] = t.m_points[p];
+        }
+        Triangle *r = new Triangle(tp[0], tp[1], tp[2]);
+        for(int i{} ; i < 3 ; ++i) {
+            int v;
+            in >> v;
+            if(v != -1) r->setVoisin(i, t.m_triangles[v]);
+        }
+        bool c;
+        in >> c;
+        if(c) r->isCalculated();
+        t.m_triangles[i] = r;
     }
     return in;
 }

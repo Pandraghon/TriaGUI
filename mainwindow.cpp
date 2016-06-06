@@ -76,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow() {
     delete ui;
+    data.clear();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
@@ -132,6 +133,9 @@ void MainWindow::addPoint(const QPointF &pos) {
     ui->tabPoints->model()->layoutChanged();
     graphicsScene->addPoint(p, currentTriang);
     setModified();
+    graphicsView->refresh();
+    ui->textSelectedPointName->setText(QString::fromStdString(p->getNom()));
+    ui->textSelectedPointPosition->setText(QString::fromStdString(p->getCoord()));
 }
 
 void MainWindow::addSegment(const QList<QGraphicsItem *> &list) {
@@ -140,6 +144,7 @@ void MainWindow::addSegment(const QList<QGraphicsItem *> &list) {
     ui->tabSegments->model()->layoutChanged();
     graphicsScene->addSegment(s, currentTriang);
     setModified();
+    graphicsView->refresh();
 }
 
 void MainWindow::redraw(const Point& p1, const Point& p2) {
@@ -189,9 +194,7 @@ void MainWindow::manageMode() {
 
 void MainWindow::manageVisibility() {
     graphicsScene->setVisibility(currentTriang, ui->isVisible->isChecked());
-    // Hack pour faire redessiner la scene
-    graphicsView->zoom(2.0);
-    graphicsView->zoom(0.5);
+    graphicsView->refresh();
     setModified();
 }
 
@@ -202,6 +205,7 @@ void MainWindow::generate() {
         graphicsScene->addTriangle(r, currentTriang);
     }
     setModified();
+    graphicsView->refresh();
 }
 
 void MainWindow::nextOrder() {
@@ -215,6 +219,7 @@ void MainWindow::nextOrder() {
     ui->triBox->setCurrentIndex(currentTriang);
     //changeDegree(currentTriang);
     setModified();
+    graphicsView->refresh();
 }
 
 void MainWindow::save(bool forced) {
@@ -225,7 +230,11 @@ void MainWindow::save(bool forced) {
 
     qDebug() << "Saving in " << filename;
     std::ofstream fout{filename.toStdString()};
-    fout << data;
+    fout << data << *graphicsScene;
+    /*for(unsigned int i{} ; i < data.nbTriangulation() ; ++i) {
+        fout << GraphicsScene::visibility(i) << " "
+             << GraphicsScene::color(i).name().toStdString() << std::endl;
+    }*/
 
     currentSaveFile = filename;
     setModified(false);
@@ -256,17 +265,32 @@ void MainWindow::load() {
         }
     }
 
-    QString filename = QFileDialog::getSaveFileName(this, tr("Ouvrir"), "files/", tr("Save Files (*.save)"));
+    QString filename = QFileDialog::getOpenFileName(this, tr("Ouvrir"), "files/", tr("Save Files (*.save)"));
     if(filename.isNull()) return;
 
     clear();
     qDebug() << "Restoring from " << filename;
     std::ifstream fin{filename.toStdString()};
     fin >> data;
+    for(int i{} ; i < data.nbTriangulation() ; ++i) {
+        bool vis;
+        std::string col;
+        fin >> vis
+            >> col;
+        GraphicsScene::setVisibility(i, vis);
+        GraphicsScene::setColor(i, QColor(QString::fromStdString(col)));
+    }
+
+    for(unsigned int i{} ; i < data.nbTriangulation() ; ++i) {
+        graphicsScene->paintTriangulation(i);
+    }
 
     currentSaveFile = filename;
 
-    currentTriang == 0 ? changeDegree(0) : ui->triBox->setCurrentIndex(data.nbTriangulation());
+    for(int i{ui->triBox->count()} ; i < data.nbTriangulation() ; ++i)
+        ui->triBox->addItem(QString("Degré %1").arg(i + 1));
+
+    currentTriang == 0 ? changeDegree(0) : ui->triBox->setCurrentIndex(data.nbTriangulation() - 1);
     setModified(false);
 }
 
@@ -274,15 +298,20 @@ void MainWindow::clear() {
     //currentTriang = 0;
     int nb = data.nbTriangulation();
     data.clear();
+    data.addTriangulation(new Triangulation());
     currentTriang == 0 ? changeDegree(0) : ui->triBox->setCurrentIndex(0);
     for(unsigned int i{1} ; i < nb ; ++i) ui->triBox->removeItem(1);
     graphicsView->likeANewBorn();
     graphicsScene->clear();
+    GraphicsScene::reset();
 }
 
 void MainWindow::newFile() {
     qDebug() << Q_FUNC_INFO;
     clear();
+    GraphicsScene::setColor(0, Qt::green);
+    GraphicsScene::setVisibility(0, true);
     currentSaveFile.clear();
     setModified(false);
+    graphicsView->refresh();
 }

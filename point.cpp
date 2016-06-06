@@ -1,6 +1,7 @@
 #include "point.h"
 #include "segment.h"
 #include <iostream>
+#include <sstream>
 
 int Point::nb=0;
 
@@ -140,14 +141,10 @@ std::string Point::getNom() const{
     return m_nom;
 }
 
-std::string Point::getCoord() const
-{
-    std::string coord="(";
-    coord+=std::to_string(m_x);
-    coord+=",";
-    coord+=std::to_string(m_y);
-    coord+=")";
-    return coord;
+std::string Point::getCoord() const {
+    std::ostringstream str;
+    str << "(" << std::to_string(m_x) << ";" << std::to_string(m_y) << ")";
+    return str.str();
 }
 
 void Point::print() const {
@@ -205,10 +202,9 @@ std::ostream& operator<<(std::ostream& out, const Point& p) {
     return out;
 }
 
-std::istream& operator>>(std::istream& in, Point* p) {
-    p = new Point();
-    in >> p->m_nom
-       >> p->m_x
-       >> p->m_y;
+std::istream& operator>>(std::istream& in, Point& p) {
+    in >> p.m_nom
+       >> p.m_x
+       >> p.m_y;
     return in;
 }

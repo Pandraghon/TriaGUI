@@ -18,7 +18,7 @@ public:
 
     std::vector<Triangulation*> getTriangulations() const;
     Triangulation* getTriangulation(int index) const;
-    int nbTriangulation() const;
+    unsigned int nbTriangulation() const;
     void addTriangulation(Triangulation *t);
     void nextOrder();
 

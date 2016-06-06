@@ -34,7 +34,7 @@ public:
     static void initIndex();
 
     friend std::ostream& operator<<(std::ostream&, const Point&);
-    friend std::istream& operator>>(std::istream&, Point*);
+    friend std::istream& operator>>(std::istream&, Point&);
 
     int getOrder() const;
     void setOrder(int order);
@@ -51,6 +51,6 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& out, const Point& p);
-std::istream& operator>>(std::istream& in, Point* p);
+std::istream& operator>>(std::istream& in, Point& p);
 
 #endif // POINT_H

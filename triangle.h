@@ -11,7 +11,6 @@ class Triangle
 {
 public:
     Triangle(Point* p1, Point* p2, Point* p3);
-    Triangle(Point* p1, Point* p2, Point* p3, Data* d);
     Triangle(Segment *s1, Segment *s2, Triangle*** voisins);
     Point* getP0() const;
     Point* getP1() const;

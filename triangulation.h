@@ -39,7 +39,7 @@ public:
     void clear();
 
     friend std::ostream& operator<<(std::ostream&, const Triangulation&);
-    friend std::istream& operator>>(std::istream&, Triangulation*);
+    friend std::istream& operator>>(std::istream&, Triangulation&);
     Triangle ***voisins;
 
 private:
@@ -50,6 +50,6 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& out, const Triangulation& t);
-std::istream& operator>>(std::istream& in, Triangulation* t);
+std::istream& operator>>(std::istream& in, Triangulation& t);
 
 #endif // TRIANGULATION_H

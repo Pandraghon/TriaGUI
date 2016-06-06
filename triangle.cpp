@@ -54,14 +54,6 @@ Triangle::Triangle(Point* p1, Point* p2, Point* p3):
     m_nom=m_points[0]->getNom()+m_points[1]->getNom()+m_points[2]->getNom();
 }
 
-Triangle::Triangle(Point *p1, Point *p2, Point *p3, Data *d)
-{
-    Segment *s1, *s2, *s3;
-    if(!p1->isSegment(p2)) s1=new Segment(p1, p2);
-    if(!p1->isSegment(p3)) s2=new Segment(p1, p3);
-    if(!p2->isSegment(p3)) s3=new Segment(p2, p3);
-}
-
 //s1 et s2 ont le meme point origine
 Triangle::Triangle(Segment *s1, Segment *s2, Triangle ***voisins):
     Triangle(s1->getP0(), s1->getP1(), s2->getP1())
@@ -302,7 +294,6 @@ void Triangle::setOrder(int order) {
 
 
 std::ostream &operator<<(std::ostream &out, const Triangle &t) {
-    out << t.m_nom;
     for(int i{} ; i < 3 ; ++i) {
         out << " ";
         if(t.m_points[i] == NULL) out << "-1";
@@ -313,6 +304,7 @@ std::ostream &operator<<(std::ostream &out, const Triangle &t) {
         if(t.m_voisins[i] == NULL) out << "-1";
         else                       out << t.m_voisins[i]->getOrder();
     }
+    out << " " << t.calculated();
 }
 
 

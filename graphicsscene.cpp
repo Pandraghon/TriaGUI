@@ -126,6 +126,11 @@ void GraphicsScene::paintTriangulation(Triangulation *tri, int i) {
     }
 }
 
+void GraphicsScene::reset() {
+    visibilityOfTriangulation.clear();
+    colorOfTriangulation.clear();
+}
+
 const QColor &GraphicsScene::color(int i) {
     return colorOfTriangulation.at(i);
 }
@@ -151,4 +156,13 @@ void GraphicsScene::setColor(int indexTriangulation, const QColor &color) {
 void GraphicsScene::setVisibility(int indexTriangulation, bool visibility) {
     if(visibilityOfTriangulation.size() <= indexTriangulation) visibilityOfTriangulation.resize(indexTriangulation + 1);
     visibilityOfTriangulation[indexTriangulation] = visibility;
+}
+
+
+std::ostream &operator<<(std::ostream &out, const GraphicsScene &v) {
+    for(unsigned int i{} ; i < GraphicsScene::visibilityOfTriangulation.size() ; ++i) {
+        out << GraphicsScene::visibilityOfTriangulation[i] << " "
+            << GraphicsScene::colorOfTriangulation[i].name().toStdString() << std::endl;
+    }
+    return out;
 }

@@ -9,6 +9,7 @@ class GraphicsView : public QGraphicsView
     Q_OBJECT
 public:
     explicit GraphicsView(QWidget *parent = 0);
+    void refresh();
     //static constexpr double scaleFactor = 1.15;
 
 protected:

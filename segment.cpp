@@ -65,17 +65,13 @@ void Segment::setOrder(int order) {
 
 
 std::ostream &operator<<(std::ostream &out, const Segment &s) {
-    out << s.m_nom << " "
-        << s.m_points[0]->getOrder() << " "
+    out << s.m_points[0]->getOrder() << " "
         << s.m_points[1]->getOrder();
     return out;
 }
 
 
 std::istream &operator>>(std::istream &in, Segment &s) {
-    int p1, p2;
-    in >> s.m_nom
-       >> p1
-       >> p2;
+    in >> s.m_nom;
     return in;
 }

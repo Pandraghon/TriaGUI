@@ -17,6 +17,12 @@ GraphicsView::GraphicsView(QWidget *parent) :
     setDragMode(DragMode::NoDrag);
 }
 
+void GraphicsView::refresh() {
+    // Hack for refresh
+    zoom(2.0);
+    zoom(0.5);
+}
+
 void GraphicsView::wheelEvent(QWheelEvent *event) {
     wheel = true;
     if(event->delta() > 0) {

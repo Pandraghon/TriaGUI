@@ -27,7 +27,7 @@ Triangulation *Data::getTriangulation(int index) const {
     return m_triangs.at(index);
 }
 
-int Data::nbTriangulation() const {
+unsigned int Data::nbTriangulation() const {
     return m_triangs.size();
 }
 
@@ -74,7 +74,6 @@ void Data::exportToEPS(const std::string &filename) {
 void Data::clear() {
     for(unsigned int i{} ; i < m_triangs.size() ; ++i) delete m_triangs[i];
     m_triangs.clear();
-    m_triangs.push_back(new Triangulation());
     Point::initIndex();
     Segment::initIndex();
     Triangle::initIndex();
@@ -98,14 +97,18 @@ std::istream &operator>>(std::istream &in, Data &v) {
     int triangsSize{};
     in >> triangsSize;
     v.m_triangs.resize(triangsSize);
-    /*Triangulation *t;
+    Triangulation t;
     for(int i{} ; i < triangsSize ; ++i) {
-        in >> *t;
-        v.m_triangs[i] = new Point(p.getX(), p.getY());
-    }*/
-    int s;
-    in >> s;
-    Point *p;
-    for(int i = 0 ; i < s ; ++i) in >> p;
+        in >> t;
+        v.m_triangs[i] = new Triangulation(t);
+        Point::initIndex();
+        Segment::initIndex();
+        Triangle::initIndex();
+    }
+//    int s;
+//    in >> s;
+//    Point *p;
+//    for(int i = 0 ; i < s ; ++i) in >> p;
+//    p->print();
     return in;
 }
