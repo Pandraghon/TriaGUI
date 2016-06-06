@@ -8,6 +8,8 @@
 #include "triangulation.h"
 #include "point.h"
 
+class Triangulation;
+
 class Data
 {
 public:
@@ -21,13 +23,13 @@ public:
     void nextOrder();
 
     void exportToEPS(const std::string& filename);
+    void clear();
 
     friend std::ostream& operator<<(std::ostream&, const Data&);
     friend std::istream& operator>>(std::istream&, Data&);
 
 private:
     std::vector<Triangulation*> m_triangs;
-    std::vector<Point*> m_points;
 
 };
 

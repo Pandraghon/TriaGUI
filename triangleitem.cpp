@@ -42,7 +42,7 @@ void TriangleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*op
 
     //painter->drawPolygon(poly);
     QBrush b(GraphicsScene::color(indexOfTriangulation), Qt::SolidPattern);
-    //if(triangle->isGenerated()) b.setStyle(Qt::FDiagPattern);
+    if(triangle->calculated()) b.setStyle(Qt::FDiagPattern);
     painter->fillPath(path, b);
     painter->restore();
 }

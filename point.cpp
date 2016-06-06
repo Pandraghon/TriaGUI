@@ -4,7 +4,7 @@
 
 int Point::nb=0;
 
-Point::Point() : Point(0, 0) {}
+Point::Point() : Point(0.0, 0.0) {}
 
 Point::Point(float x, float y) :
     m_x(x),
@@ -12,9 +12,49 @@ Point::Point(float x, float y) :
 //    m_neighbors(),
     m_segments(),
     m_nom("P"),
-    m_index(nb)
+    m_order(),
+    m_index(nb),
+    m_generateurs()
 {
     m_nom += std::to_string(nb++);
+}
+
+Point::Point(Point* p1, Point* p2) :
+    Point()
+{
+    //std::cout<<"Construction du barycentre de "<<p1->getCoord()<<" et "<<p2->getCoord()<<std::endl;
+    float x=0, y=0;
+    Point* pointC=p1;
+
+    for(int i=0; i<2; ++i)
+    {
+
+        //std::cout<<"point: "<<pointC->getNom()<<std::endl;
+        if(pointC->isSite())
+        {
+            //std::cout<<"est un site"<<std::endl;
+             m_generateurs.insert(pointC);
+             x+=pointC->getX();
+             y+=pointC->getY();
+        }
+        else
+            for (std::set<Point*>::iterator it=pointC->m_generateurs.begin(); it!=pointC->m_generateurs.end(); ++it)
+            {
+                if(this->m_generateurs.insert(*it).second)
+                {
+                    x+=(*it)->getX();
+                    y+=(*it)->getY();
+                }
+            }
+        pointC=p2;
+    }
+    int n=m_generateurs.size();
+    x/=n;
+    y/=n;
+    m_x=x;
+    m_y=y;
+    this->print();
+
 }
 
 /*void Point::addNeighbor(Point* p) {
@@ -63,6 +103,7 @@ Segment* Point::getSegment(int i) const {
 }
 
 int Point::nbSegments() const {
+    std::cout << m_segments.size();
     return m_segments.size();
 }
 
@@ -99,36 +140,75 @@ std::string Point::getNom() const{
     return m_nom;
 }
 
+std::string Point::getCoord() const
+{
+    std::string coord="(";
+    coord+=std::to_string(m_x);
+    coord+=",";
+    coord+=std::to_string(m_y);
+    coord+=")";
+    return coord;
+}
+
 void Point::print() const {
-    std::cout<<m_nom<<": ("<<this->getX()<<','<<this->getY()<<')'<<std::endl;
+    std::cout<<m_nom<<": ("<<this->getX()<<','<<this->getY()<<") ";
+    if (m_generateurs.size()>0){
+        std::cout<<"generateurs: ( ";
+        for (std::set<Point*>::iterator it=m_generateurs.begin(); it!=m_generateurs.end(); ++it)
+            std::cout<<(*it)->getNom()<<' ';
+        std::cout<<")  ";
+    }
     if (m_segments.size()>0){
 
-        std::cout<<"Segments: { ";
+        std::cout<<"segments sortants: { ";
         for(int i=0; i<m_segments.size(); i++){
             m_segments[i]->print();
             std::cout<<" ";
         }
         std::cout<<"}"<<std::endl;
     }
-    std::cout<<std::endl;
+    else std::cout<<std::endl;
 }
 
 int Point::getIndex() const {
     return m_index;
 }
 
+bool Point::isSite() const
+{
+    return m_generateurs.empty();
+}
+
+int Point::nbGenerateurs() const
+{
+    return m_generateurs.size();
+}
+
+void Point::initIndex()
+{
+    nb=0;
+}
+
+int Point::getOrder() const {
+    return m_order;
+}
+
+void Point::setOrder(int order) {
+    m_order = order;
+}
+
+
 std::ostream& operator<<(std::ostream& out, const Point& p) {
     out << p.m_nom << " "
         << p.m_x << " "
-        << p.m_y << " "
-        << p.m_index;
+        << p.m_y;
     return out;
 }
 
-std::istream& operator>>(std::istream& in, Point& p) {
-    in >> p.m_nom
-       >> p.m_x
-       >> p.m_y
-       >> p.m_index;
+std::istream& operator>>(std::istream& in, Point* p) {
+    p = new Point();
+    in >> p->m_nom
+       >> p->m_x
+       >> p->m_y;
     return in;
 }

@@ -26,6 +26,7 @@ public:
     void setMode(MODE mode);
     void paintTriangulation(int index);
     void paintTriangulation(Triangulation* tri, int i);
+    //void clear();
 
     static const QColor& color(int i);
     static bool visibility(int i);
@@ -37,8 +38,6 @@ private:
     static QVector<bool> visibilityOfTriangulation;
     QVector<PointItem*> pointsSelected;
     QPointF lastMousePos;
-    //PointItem* ps1; //points of segment
-    //PointItem* ps2;
 
     void clickOnSelection(const QPointF& pos);
 

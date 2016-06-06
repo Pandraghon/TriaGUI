@@ -257,7 +257,7 @@ namespace svg
                 return std::string();
 
             std::stringstream ss;
-            ss << attribute("stroke-width", translateScale(width, layout)) << attribute("stroke", color.toString(layout));
+            ss << attribute("stroke-linecap", "round") << attribute("stroke-linejoin", "round") << attribute("stroke-width", translateScale(width, layout)) << attribute("stroke", color.toString(layout));
             return ss.str();
         }
     private:

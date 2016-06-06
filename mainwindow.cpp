@@ -61,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Toolbar
     QObject::connect(ui->actionEnregistrer, &QAction::triggered, this, &MainWindow::save);
+    QObject::connect(ui->actionNouveau, &QAction::triggered, this, &MainWindow::newFile);
     QObject::connect(ui->actionEnregistrer_sous, &QAction::triggered, this, &MainWindow::saveAs);
     QObject::connect(ui->actionExporter, &QAction::triggered, this, &MainWindow::exportToSVG);
     QObject::connect(ui->actionOuvrir, &QAction::triggered, this, &MainWindow::load);
@@ -125,7 +126,6 @@ void MainWindow::setMousePosText(const QPointF& pos) {
     ui->textMousePosition->setText(QString("(%1;%2)").arg(QString::number(pos.x())).arg(QString::number(pos.y())));
 }
 
-
 void MainWindow::addPoint(const QPointF &pos) {
     Point* p = new Point(pos.x(), pos.y());
     this->data.getTriangulation(this->currentTriang)->addPoint(p);
@@ -161,10 +161,12 @@ void MainWindow::changeColor(const QColor &col) {
 }
 
 void MainWindow::changeDegree(int degree) {
+    qDebug() << Q_FUNC_INFO << degree;
     ui->isVisible->setChecked(GraphicsScene::visibility(degree));
     QString qss = QString("background-color: %1").arg(GraphicsScene::color(degree).name());
     ui->colorButton->setStyleSheet(qss);
     currentTriang = degree;
+    Triangulation* t(data.getTriangulation(degree));
     pointsTableModel->setTriangulation(data.getTriangulation(degree));
     ui->tabPoints->model()->layoutChanged();
     segmentsTableModel->setTriangulation(data.getTriangulation(degree));
@@ -257,10 +259,30 @@ void MainWindow::load() {
     QString filename = QFileDialog::getSaveFileName(this, tr("Ouvrir"), "files/", tr("Save Files (*.save)"));
     if(filename.isNull()) return;
 
+    clear();
     qDebug() << "Restoring from " << filename;
     std::ifstream fin{filename.toStdString()};
     fin >> data;
 
     currentSaveFile = filename;
+
+    currentTriang == 0 ? changeDegree(0) : ui->triBox->setCurrentIndex(data.nbTriangulation());
+    setModified(false);
+}
+
+void MainWindow::clear() {
+    //currentTriang = 0;
+    int nb = data.nbTriangulation();
+    data.clear();
+    currentTriang == 0 ? changeDegree(0) : ui->triBox->setCurrentIndex(0);
+    for(unsigned int i{1} ; i < nb ; ++i) ui->triBox->removeItem(1);
+    graphicsView->likeANewBorn();
+    graphicsScene->clear();
+}
+
+void MainWindow::newFile() {
+    qDebug() << Q_FUNC_INFO;
+    clear();
+    currentSaveFile.clear();
     setModified(false);
 }

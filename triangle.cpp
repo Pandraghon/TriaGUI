@@ -7,7 +7,9 @@ int Triangle::nb=0;
 Triangle::Triangle(Point* p1, Point* p2, Point* p3):
     m_points(),
     m_voisins(),
-    m_index(nb++)
+    m_order(),
+    m_index(nb++),
+    m_calculated(false)
 {
     if(p1->isBefore(p2)) {
         if(p3->isBefore(p1)) {
@@ -52,10 +54,20 @@ Triangle::Triangle(Point* p1, Point* p2, Point* p3):
     m_nom=m_points[0]->getNom()+m_points[1]->getNom()+m_points[2]->getNom();
 }
 
+Triangle::Triangle(Point *p1, Point *p2, Point *p3, Data *d)
+{
+    Segment *s1, *s2, *s3;
+    if(!p1->isSegment(p2)) s1=new Segment(p1, p2);
+    if(!p1->isSegment(p3)) s2=new Segment(p1, p3);
+    if(!p2->isSegment(p3)) s3=new Segment(p2, p3);
+}
+
 //s1 et s2 ont le meme point origine
 Triangle::Triangle(Segment *s1, Segment *s2, Triangle ***voisins):
     Triangle(s1->getP0(), s1->getP1(), s2->getP1())
 {
+    //m_calculated=true;
+
     Point *p=s1->getP0(), *q=s1->getP1(), *r=s2->getP1(); //s1=[pq] s2=[pr]
     std::cout<<m_nom<<std::endl;
 
@@ -63,9 +75,9 @@ Triangle::Triangle(Segment *s1, Segment *s2, Triangle ***voisins):
     //verifier si il y'a un triangle a droite de s1 ou a gauche de s2
     {
         voisins[p->getIndex()][q->getIndex()]=this; //a gauche de s1=[pq]
-    std::cout<<std::endl<<" est a gauche de "<<s1->getNom()<<" mis en ["<<p->getIndex()<<"]["<<q->getIndex()<<"]"<<std::endl;
+    //std::cout<<" est a gauche de "<<s1->getNom()<<" mis en ["<<p->getIndex()<<"]["<<q->getIndex()<<"]"<<std::endl;
         voisins[r->getIndex()][p->getIndex()]=this; //a droite de s2=[pr]
-    std::cout<<" est a droite de "<<s2->getNom()<<" mis en ["<<r->getIndex()<<"]["<<p->getIndex()<<"]"<<std::endl;
+    //std::cout<<" est a droite de "<<s2->getNom()<<" mis en ["<<r->getIndex()<<"]["<<p->getIndex()<<"]"<<std::endl;
 
         if( voisins[q->getIndex()][p->getIndex()]!=NULL)//si il y'a un triangle a droite de s1
         {
@@ -89,7 +101,7 @@ Triangle::Triangle(Segment *s1, Segment *s2, Triangle ***voisins):
         }
     }
 
-///CE CAS NE SE PRESENTE JAMAIS CAR LES SEGMENTS D'UN POINT SONT TRIEES DANS LE SENS TRIGO
+///CE CAS NE SE PRESENTE JAMAIS CAR LES SEGMENTS SORTANTS D'UN POINT SONT TRIEES DANS LE SENS TRIGO
 //    else //le triangle est a droite de s1=[pq] et a gauche de s2=[pr] TO DO : verifier si il y'a un triangle a droite de s2 ou a gauche de s1
 //    {
 //        voisins[q->getIndex()][p->getIndex()]=this;
@@ -102,7 +114,7 @@ Triangle::Triangle(Segment *s1, Segment *s2, Triangle ***voisins):
     if (p->isLeft(q,r))
     {
         voisins[q->getIndex()][r->getIndex()]=this; //a gauche de [qr]
-    std::cout<<" est a gauche de ["<<q->getNom()<<r->getNom()<<"] mis en ["<<q->getIndex()<<"]["<<r->getIndex()<<"]"<<std::endl;
+    //std::cout<<" est a gauche de ["<<q->getNom()<<r->getNom()<<"] mis en ["<<q->getIndex()<<"]["<<r->getIndex()<<"]"<<std::endl;
         if( voisins[r->getIndex()][q->getIndex()]!=NULL)//si il y'a un triangle a droite de [qr]
         {
             int pos = this->pos3emePoint(q,r);
@@ -138,6 +150,88 @@ Point *Triangle::getP(int i) const {
     return m_points[i];
 }
 
+std::vector<Segment *> Triangle::getSegments() {
+    Point *p1=this->getP0(),
+    *p2=this->getP1(),
+    *p3=this->getP2();
+
+     Segment *seg1, *seg2, *seg3;
+
+    //recherche des segments formant ce triangle
+    int s=0;
+
+    while(p1->getSegment(s)->getP1()!=p2) ++s;
+    seg1=p1->getSegment(s);
+
+    s=0;
+    while(p1->getSegment(s)->getP1()!=p3) ++s;
+    seg2=p1->getSegment(s);
+
+    s=0;
+    while(p2->getSegment(s)->getP1()!=p3) ++s;
+    seg3=p2->getSegment(s);
+
+    std::vector<Segment*> segs;
+    segs.push_back(seg1);segs.push_back(seg2);segs.push_back(seg3);
+    return segs;
+}
+
+void Triangle::getVoisinsHachure(std::vector<bool> &marque, std::vector<Triangle *> &voisHach)
+{
+    if(marque[this->getIndex()]) return;
+    if(!this->calculated()){
+        marque[this->getIndex()]=true;
+        return;
+    }
+    //hachuré pas traité
+    voisHach.push_back(this);
+    marque[this->getIndex()]=true;
+    for(int i=0; i<3; ++i){
+        if(m_voisins[i]!=NULL){
+            m_voisins[i]->getVoisinsHachure(marque,voisHach);
+        }
+    }
+}
+
+bool Triangle::marquerVoisinage(Triangle ***voisins)
+{
+    this->print();
+    Point* p= this->getP0(), *q=this->getP1(), *r=this->getP2();
+    if (p->isLeft(q,r))
+    {
+        voisins[q->getIndex()][r->getIndex()]=this; //a gauche de [qr]
+    //std::cout<<" est a gauche de ["<<q->getNom()<<r->getNom()<<"] mis en ["<<q->getIndex()<<"]["<<r->getIndex()<<"]"<<std::endl;
+    }
+    else
+        {
+            voisins[r->getIndex()][q->getIndex()]=this;
+        //std::cout<<" est a droite de ["<<q->getNom()<<r->getNom()<<"] mis en ["<<r->getIndex()<<"]["<<q->getIndex()<<"]"<<std::endl;
+        }
+
+    if (q->isLeft(p,r))
+    {
+        voisins[p->getIndex()][r->getIndex()]=this; //a gauche de [pr]
+    //std::cout<<" est a gauche de ["<<p->getNom()<<r->getNom()<<"] mis en ["<<p->getIndex()<<"]["<<r->getIndex()<<"]"<<std::endl;
+    }
+    else
+    {
+            voisins[r->getIndex()][p->getIndex()]=this;
+        //std::cout<<" est a droite de ["<<p->getNom()<<r->getNom()<<"] mis en ["<<r->getIndex()<<"]["<<p->getIndex()<<"]"<<std::endl;
+    }
+
+    if (r->isLeft(p,q))
+    {
+        voisins[p->getIndex()][q->getIndex()]=this; //a gauche de [pq]
+    //std::cout<<" est a gauche de ["<<p->getNom()<<q->getNom()<<"] mis en ["<<p->getIndex()<<"]["<<q->getIndex()<<"]"<<std::endl;
+    }
+    else
+    {
+            voisins[q->getIndex()][p->getIndex()]=this;
+        //std::cout<<" est a droite de ["<<p->getNom()<<q->getNom()<<"] mis en ["<<p->getIndex()<<"]["<<q->getIndex()<<"]"<<std::endl;
+    }
+
+}
+
 void Triangle::setVoisin(int i, Triangle *t) {
     m_voisins[i]=t;
 }
@@ -165,12 +259,24 @@ int Triangle::pos3emePoint(Point *p1, Point *p2) {
     }
 }
 
+
 int Triangle::getIndex() const {
     return m_index;
 }
 
+bool Triangle::calculated() const
+{
+    return m_calculated;
+}
+
+void Triangle::isCalculated()
+{
+    m_calculated=true;
+}
+
 void Triangle::print() const {
     std::cout<<m_nom;
+    if(calculated()) std::cout<<" hachuré ";
     if(m_voisins[0]!=NULL||m_voisins[1]!=NULL||m_voisins[2]!=NULL)
     {
         std::cout<<"   Ses Voisins: ";
@@ -182,22 +288,47 @@ void Triangle::print() const {
     }
 }
 
+void Triangle::initIndex() {
+    nb = 0;
+}
+
+int Triangle::getOrder() const {
+    return m_order;
+}
+
+void Triangle::setOrder(int order) {
+    m_order = order;
+}
+
 
 std::ostream &operator<<(std::ostream &out, const Triangle &t) {
     out << t.m_nom;
     for(int i{} ; i < 3 ; ++i) {
         out << " ";
         if(t.m_points[i] == NULL) out << "-1";
-        else                      out << t.m_points[i]->getIndex();
+        else                      out << t.m_points[i]->getOrder();
     }
     for(int i{} ; i < 3 ; ++i) {
         out << " ";
         if(t.m_voisins[i] == NULL) out << "-1";
-        else                       out << t.m_voisins[i]->getIndex();
+        else                       out << t.m_voisins[i]->getOrder();
     }
 }
 
 
 std::istream &operator>>(std::istream &in, Triangle &t) {
-
+    in >> t.m_nom;
+    for(int i{} ; i < 3 ; ++i) {
+        int p;
+        in >> p;
+        if(p == -1) t.m_points[i] = NULL;
+        //else        t.m_points[i] = lkvl;
+    }
+    for(int i{} ; i < 3 ; ++i) {
+        int v;
+        in >> v;
+        if(v == -1) t.m_voisins[i] = NULL;
+        //else        t.m_voisins[i] = l,lk;
+    }
+    return in;
 }

@@ -64,6 +64,8 @@ private slots:
     void saveAs();
     void exportToSVG();
     void load();
+    void clear();
+    void newFile();
 };
 
 //Q_DECLARE_METATYPE(MainWindow)

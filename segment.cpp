@@ -4,7 +4,7 @@
 int Segment::nb=0;
 
 Segment::Segment(Point *p1, Point *p2)
-    : m_nom(), m_index(nb)
+    : m_nom(), m_order(), m_index(nb)
 {
     if(p1->isBefore(p2)) {
         m_points[0] = p1;
@@ -50,15 +50,32 @@ int Segment::getIndex() const {
     return m_index;
 }
 
+void Segment::initIndex() {
+    nb = 0;
+}
+
+int Segment::getOrder() const {
+    return m_order;
+}
+
+void Segment::setOrder(int order) {
+    m_order = order;
+}
+
+
 
 std::ostream &operator<<(std::ostream &out, const Segment &s) {
     out << s.m_nom << " "
-        << s.m_points[0]->getIndex() << " "
-        << s.m_points[1]->getIndex();
+        << s.m_points[0]->getOrder() << " "
+        << s.m_points[1]->getOrder();
     return out;
 }
 
 
 std::istream &operator>>(std::istream &in, Segment &s) {
-
+    int p1, p2;
+    in >> s.m_nom
+       >> p1
+       >> p2;
+    return in;
 }

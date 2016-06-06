@@ -13,14 +13,19 @@ public:
     std::string getNom() const;
     void print() const;
     int getIndex() const;
+    static void initIndex();
 
     friend std::ostream& operator<<(std::ostream&, const Segment&);
     friend std::istream& operator>>(std::istream&, Segment&);
+
+    int getOrder() const;
+    void setOrder(int order);
 
 private:
     static int nb;
     Point* m_points[2];
     std::string m_nom;
+    int m_order;
     int m_index;
 };
 

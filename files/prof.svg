@@ -1,0 +1,50 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="85px" height="53px" xmlns="http://www.w3.org/2000/svg" version="1.1" >
+	<polygon points="0,31.75 20.5,49 32.25,21 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="0,31.75 14,7.25 32.25,21 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="14,7.25 32.25,21 43.5,0 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="20.5,49 43.25,53 51.25,34.75 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="20.5,49 32.25,21 51.25,34.75 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="32.25,21 51.25,34.75 85,38 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="32.25,21 67.5,21.25 85,38 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="32.25,21 67.5,21.25 82,0 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="32.25,21 43.5,0 82,0 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="43.25,53 51.25,34.75 85,38 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="67.5,21.25 82,0 85,38 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="10.25,40.375 16.125,26.375 26.375,35 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="7,19.5 16.125,26.375 23.125,14.125 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="23.125,14.125 28.75,3.625 37.875,10.5 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="31.875,51 35.875,41.875 47.25,43.875 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="26.375,35 35.875,41.875 41.75,27.875 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="41.75,27.875 58.625,29.5 68.125,36.375 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="49.875,21.125 58.625,29.5 76.25,29.625 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="49.875,21.125 57.125,10.5 74.75,10.625 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="37.875,10.5 57.125,10.5 62.75,0 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="47.25,43.875 64.125,45.5 68.125,36.375 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="74.75,10.625 76.25,29.625 83.5,19 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="49.875,21.125 74.75,10.625 76.25,29.625 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="10.25,40.375 26.375,35 31.875,51 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="16.125,26.375 26.375,35 37.875,10.5 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="16.125,26.375 23.125,14.125 37.875,10.5 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="26.375,35 31.875,51 35.875,41.875 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="26.375,35 41.75,27.875 49.875,21.125 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="26.375,35 37.875,10.5 49.875,21.125 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="28.75,3.625 37.875,10.5 62.75,0 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="35.875,41.875 41.75,27.875 47.25,43.875 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="37.875,10.5 49.875,21.125 57.125,10.5 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="41.75,27.875 47.25,43.875 68.125,36.375 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="41.75,27.875 49.875,21.125 58.625,29.5 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="60.5833,14.0833 61.5833,26.75 78.1667,19.75 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="17.5833,33.9167 21.25,44.5833 32,41 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="17.5833,33.9167 25.25,17.5833 32.0833,23.3333 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="15.4167,20 25.25,17.5833 29.9167,9.41667 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="32,41 34.6667,34.9167 38.3333,45.5833 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="34.6667,34.9167 40.0833,30.4167 50.3333,25.6667 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="32.0833,23.3333 40.0833,30.4167 47.75,14.0833 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="29.9167,9.41667 46.5,2.41667 52.5833,7 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="34.6667,34.9167 38.3333,45.5833 42.25,36.25 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="47.75,14.0833 52.5833,7 60.5833,14.0833 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="42.25,36.25 56.1667,31.25 59.8333,41.9167 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+	<polygon points="50.3333,25.6667 56.1667,31.25 61.5833,26.75 " fill="rgb(85,0,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(56,0,170)" />
+</svg>

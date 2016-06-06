@@ -8,12 +8,14 @@
 #include "triangle.h"
 
 class Data;
+class Triangle;
 
 class Triangulation
 {
 public:
     Triangulation();
     Triangulation(Data* d);
+    void initVoisins(int nbPoints);
     int getOrdre() const;
     std::vector<Point*> getPoints() const;
     Point* getPoint(int index) const;
@@ -25,14 +27,20 @@ public:
     void addSegment(Segment* s);
     void addSegments(Segment** s, int size);
     void addTriangle(Triangle *t);
+    Triangle* getTriangle(int i) const;
     std::vector<Triangle*> getTriangles() const;
     void print() const;
     void scanTriangles();
-    void calculMilieux(std::vector<Point*> points);
-    void mileuxSegmentsTriangles(std::vector<Triangle*> triangles, int nbSegments);
+    void calculNextOrdrePoints(std::vector<Triangle*> triangles, int nbSegments);
+    void generateNextOrdre();
+    //void calculMilieux(std::vector<Point*> points);
+    //void mileuxSegmentsTriangles(std::vector<Triangle*> triangles, int nbSegments);
+
+    void clear();
 
     friend std::ostream& operator<<(std::ostream&, const Triangulation&);
-    friend std::istream& operator>>(std::istream&, Triangulation&);
+    friend std::istream& operator>>(std::istream&, Triangulation*);
+    Triangle ***voisins;
 
 private:
     std::vector<Point*> m_points;
@@ -42,6 +50,6 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& out, const Triangulation& t);
-std::istream& operator>>(std::istream& in, Triangulation& t);
+std::istream& operator>>(std::istream& in, Triangulation* t);
 
 #endif // TRIANGULATION_H

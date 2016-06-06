@@ -1,8 +1,16 @@
 <?xml version="1.0" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="1000px" height="1000px" xmlns="http://www.w3.org/2000/svg" version="1.1" >
-	<polygon points="-10,1010 0,1010 0,1000 " fill="rgb(100,100,100)" stroke-width="1" stroke="rgb(50,50,50)" />
-	<polygon points="-10,1010 -10,1000 0,1000 " fill="rgb(100,100,100)" stroke-width="1" stroke="rgb(50,50,50)" />
-	<polygon points="0,1000 10,1000 10,990 " fill="rgb(100,100,100)" stroke-width="1" stroke="rgb(50,50,50)" />
-	<polygon points="0,1000 0,990 10,990 " fill="rgb(100,100,100)" stroke-width="1" stroke="rgb(50,50,50)" />
+<svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" version="1.1" >
+	<polygon points="0,20 10,20 10,10 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="0,20 0,10 10,10 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="0,10 10,10 10,0 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="10,20 10,10 20,10 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="10,10 20,10 20,0 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="10,10 10,0 20,0 " fill="rgb(0,255,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(0,170,0)" />
+	<polygon points="5,20 5,15 10,15 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="0,15 5,15 5,10 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="5,10 5,5 10,5 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="10,15 15,15 15,10 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="15,10 15,5 20,5 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
+	<polygon points="10,5 15,5 15,0 " fill="rgb(255,0,0)" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.1" stroke="rgb(170,0,0)" />
 </svg>
